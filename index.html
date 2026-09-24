@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.10.2 – guided Boss Return
+   v1.10.3 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.10.2 – physical-table play / curated Boss Return
+   v1.10.3 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.10.2 – Frontkamera QR card scanner
+   v1.10.3 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.10.2 – robust camera handling
+   v1.10.3 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1863,6 +1863,34 @@ input{
 }
 .scannerStatus.ok{
   color:#b7d7b2;
+}
+
+
+/* =========================================================
+   v1.10.3 – QR diagnostics
+   ========================================================= */
+.scannerRawWrap{
+  margin:10px 0 12px;
+  padding:10px;
+  text-align:left;
+  border:1px solid #5e574e;
+  background:#090b0d;
+}
+.scannerRawLabel{
+  margin-bottom:5px;
+  font-size:.62rem;
+  letter-spacing:.16em;
+  color:#9f9689;
+}
+#scannerRawValue{
+  display:block;
+  max-height:120px;
+  overflow:auto;
+  white-space:pre-wrap;
+  word-break:break-all;
+  color:#e8e0d4;
+  font-size:.78rem;
+  line-height:1.35;
 }
 
 </style>
@@ -2059,8 +2087,12 @@ input{
 
     <div id="scannerResult" class="scannerResult" style="display:none">
       <span>ERKANNT</span>
-      <strong id="scannerCardName">Karte</strong>
+      <strong id="scannerCardName">QR-Code erkannt</strong>
       <small id="scannerCardGroup"></small>
+      <div id="scannerRawWrap" class="scannerRawWrap">
+        <div class="scannerRawLabel">ROHINHALT</div>
+        <code id="scannerRawValue"></code>
+      </div>
       <div class="scannerResultButtons">
         <button id="scannerRetry" type="button">Erneut scannen</button>
         <button id="scannerConfirm" class="primary" type="button">Karte spielen</button>
@@ -3191,6 +3223,7 @@ function initScannerUI(){
   scannerUI.result=document.getElementById("scannerResult");
   scannerUI.cardName=document.getElementById("scannerCardName");
   scannerUI.cardGroup=document.getElementById("scannerCardGroup");
+  scannerUI.rawValue=document.getElementById("scannerRawValue");
   scannerUI.switchCamera=document.getElementById("scannerSwitchCamera");
   scannerUI.view=document.querySelector(".scannerView");
   scannerUI.scanButton=document.getElementById("scanButton");
@@ -3452,26 +3485,39 @@ async function switchScannerCamera(){
   }
 }
 
+
 function handleQrDetected(raw){
   const now=Date.now();
   if(raw===scannerLastValue && now-scannerLastTime<1400)return;
   scannerLastValue=raw;
   scannerLastTime=now;
 
+  scannerBusy=true;
+
+  if(scannerUI.rawValue)scannerUI.rawValue.textContent=String(raw);
+
   const found=findCardByQr(raw);
-  if(found.error){
-    setScannerStatus(found.error,"error");
-    scannerBusy=false;
+
+  if(found?.card){
+    scannerDetectedCard=found.card;
+    if(scannerUI.confirm)scannerUI.confirm.textContent="Karte spielen";
+    if(scannerUI.cardName)scannerUI.cardName.textContent=found.card.name;
+    if(scannerUI.cardGroup)scannerUI.cardGroup.textContent=`Bekannte Karte · ${found.card.group}`;
+    if(scannerUI.result)scannerUI.result.style.display="block";
+    setScannerStatus("QR-Code erkannt und einer bekannten Karte zugeordnet.","ok");
     return;
   }
 
-  scannerDetectedCard=found.card;
-  scannerBusy=true;
-  if(scannerUI.cardName)scannerUI.cardName.textContent=found.card.name;
-  if(scannerUI.cardGroup)scannerUI.cardGroup.textContent=found.card.group;
+  scannerDetectedCard=null;
+  if(scannerUI.confirm)scannerUI.confirm.textContent="Schließen";
+  if(scannerUI.cardName)scannerUI.cardName.textContent="QR-Code erkannt";
+  if(scannerUI.cardGroup)scannerUI.cardGroup.textContent="Noch keiner Karte zugeordnet";
   if(scannerUI.result)scannerUI.result.style.display="block";
-  setScannerStatus("Karte erkannt. Bestätigen, um sie zu spielen.","ok");
+
+  // In diagnostics mode any QR is a successful scan.
+  setScannerStatus("QR-Code erkannt. Der Rohinhalt wird unten angezeigt.","ok");
 }
+
 
 function scanFrame(){
   const v=scannerUI.video;
@@ -3497,10 +3543,13 @@ function scanFrame(){
 }
 
 function confirmScannedCard(){
-  if(!scannerDetectedCard)return;
-  const card=scannerDetectedCard;
+  if(scannerDetectedCard){
+    const card=scannerDetectedCard;
+    closeScanner();
+    selectCard(card);
+    return;
+  }
   closeScanner();
-  selectCard(card);
 }
 
 window.addEventListener("DOMContentLoaded",()=>{
