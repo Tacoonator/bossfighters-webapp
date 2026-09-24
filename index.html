@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.10.0 – guided Boss Return
+   v1.10.1 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.10.0 – physical-table play / curated Boss Return
+   v1.10.1 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.10.0 – Frontkamera QR card scanner
+   v1.10.1 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1844,6 +1844,25 @@ input{
     from{transform:translateY(0)}
     to{transform:translateY(310px)}
   }
+}
+
+
+/* =========================================================
+   v1.10.1 – robust camera handling
+   ========================================================= */
+.scannerCameraControls{
+  display:flex;
+  justify-content:center;
+  margin-top:6px;
+}
+#scannerSwitchCamera{
+  min-width:170px;
+}
+.scannerStatus.waiting{
+  color:#d9c99d;
+}
+.scannerStatus.ok{
+  color:#b7d7b2;
 }
 
 </style>
@@ -2032,6 +2051,10 @@ input{
 
     <div id="scannerStatus" class="scannerStatus">
       Halte den QR-Code der Karte über das Display.
+    </div>
+
+    <div class="scannerCameraControls">
+      <button id="scannerSwitchCamera" type="button" style="display:none">Kamera wechseln</button>
     </div>
 
     <div id="scannerResult" class="scannerResult" style="display:none">
@@ -3151,12 +3174,17 @@ if(window.logToggle){
 }
 
 
+
 let scannerStream=null;
 let scannerRaf=null;
 let scannerBusy=false;
 let scannerDetectedCard=null;
 let scannerLastValue="";
 let scannerLastTime=0;
+
+let scannerDevices=[];
+let scannerDeviceIndex=0;
+let scannerStarting=false;
 
 function normalizeCardId(value){
   return String(value||"")
@@ -3208,9 +3236,10 @@ function findCardByQr(raw){
   return {error:"Dieser QR-Code gehört zu keiner bekannten Karte.",id};
 }
 
-function setScannerStatus(text,isError=false){
+function setScannerStatus(text,state=""){
   scannerStatus.textContent=text;
-  scannerStatus.classList.toggle("error",!!isError);
+  scannerStatus.classList.remove("error","waiting","ok");
+  if(state)scannerStatus.classList.add(state);
 }
 
 function stopScannerCamera(){
@@ -3223,6 +3252,7 @@ function stopScannerCamera(){
     scannerStream=null;
   }
   scannerVideo.srcObject=null;
+  scannerStarting=false;
 }
 
 function closeScanner(){
@@ -3240,41 +3270,155 @@ function resetScannerResult(){
   setScannerStatus("Halte den QR-Code der Karte über das Display.");
 }
 
+async function enumerateScannerCameras(){
+  try{
+    const devices=await navigator.mediaDevices.enumerateDevices();
+    scannerDevices=devices.filter(d=>d.kind==="videoinput");
+    const frontIndex=scannerDevices.findIndex(d =>
+      /front|user|facetime|selfie/i.test(d.label||"")
+    );
+    if(frontIndex>=0)scannerDeviceIndex=frontIndex;
+    scannerSwitchCamera.style.display=scannerDevices.length>1?"inline-flex":"none";
+  }catch(e){
+    scannerDevices=[];
+    scannerSwitchCamera.style.display="none";
+  }
+}
+
+async function waitForVideoFrames(timeoutMs=5000){
+  const started=Date.now();
+  while(Date.now()-started<timeoutMs){
+    if(scannerVideo.readyState>=2 && scannerVideo.videoWidth>0 && scannerVideo.videoHeight>0){
+      return true;
+    }
+    await new Promise(r=>setTimeout(r,120));
+  }
+  return false;
+}
+
+async function startCameraWithConstraints(constraints){
+  stopScannerCamera();
+  scannerStarting=true;
+  scannerStream=await navigator.mediaDevices.getUserMedia({
+    audio:false,
+    video:constraints
+  });
+  scannerVideo.srcObject=scannerStream;
+  scannerVideo.setAttribute("playsinline","");
+  scannerVideo.muted=true;
+
+  try{
+    await scannerVideo.play();
+  }catch(e){
+    // Some browsers need a tiny delay before play().
+    await new Promise(r=>setTimeout(r,150));
+    await scannerVideo.play();
+  }
+
+  const ok=await waitForVideoFrames();
+  scannerStarting=false;
+  if(!ok)throw new Error("NO_VIDEO_FRAMES");
+  return true;
+}
+
+async function startPreferredCamera(){
+  setScannerStatus("Kamera wird gestartet …","waiting");
+
+  // First request permission and prefer the user-facing camera.
+  try{
+    await startCameraWithConstraints({
+      facingMode:{ideal:"user"},
+      width:{ideal:1280},
+      height:{ideal:960}
+    });
+    await enumerateScannerCameras();
+    setScannerStatus("Frontkamera aktiv. Halte den QR-Code über das Display.","ok");
+    scannerRaf=requestAnimationFrame(scanFrame);
+    return;
+  }catch(firstError){
+    console.warn("Front camera start failed:", firstError);
+  }
+
+  // Fallback: any available camera.
+  try{
+    await startCameraWithConstraints({
+      width:{ideal:1280},
+      height:{ideal:960}
+    });
+    await enumerateScannerCameras();
+    setScannerStatus("Kamera aktiv. Falls nötig, wechsle die Kamera.","ok");
+    scannerRaf=requestAnimationFrame(scanFrame);
+    return;
+  }catch(secondError){
+    console.error("Camera fallback failed:", secondError);
+    throw secondError;
+  }
+}
+
 async function openScanner(){
   scannerModal.style.display="flex";
   resetScannerResult();
 
+  if(!window.isSecureContext){
+    setScannerStatus("Die Kamera benötigt HTTPS. Öffne die veröffentlichte GitHub-Pages-Seite.", "error");
+    return;
+  }
+
   if(!navigator.mediaDevices?.getUserMedia){
-    setScannerStatus("Dieser Browser stellt keinen Kamerazugriff bereit. Nutze unten die manuelle Kartenwahl.",true);
+    setScannerStatus("Dieser Browser unterstützt den benötigten Kamerazugriff nicht. Nutze die manuelle Kartenwahl.", "error");
     return;
   }
 
   if(typeof jsQR!=="function"){
-    setScannerStatus("Der QR-Scanner konnte nicht geladen werden. Prüfe die Internetverbindung oder nutze die manuelle Kartenwahl.",true);
+    setScannerStatus("Der QR-Scanner konnte nicht geladen werden. Prüfe die Internetverbindung oder nutze die manuelle Kartenwahl.", "error");
     return;
   }
 
   try{
-    scannerStream=await navigator.mediaDevices.getUserMedia({
-      audio:false,
-      video:{
-        facingMode:{ideal:"user"},
-        width:{ideal:1280},
-        height:{ideal:960}
-      }
+    await startPreferredCamera();
+  }catch(err){
+    const name=err?.name||"";
+    let msg="Die Kamera konnte nicht gestartet werden.";
+    if(name==="NotAllowedError" || name==="PermissionDeniedError"){
+      msg="Kamerazugriff wurde nicht erlaubt. Erlaube der Seite die Kamera in den Browser-Einstellungen und öffne den Scanner erneut.";
+    }else if(name==="NotFoundError" || name==="DevicesNotFoundError"){
+      msg="Es wurde keine verfügbare Kamera gefunden.";
+    }else if(name==="NotReadableError" || name==="TrackStartError"){
+      msg="Die Kamera wird gerade von einer anderen App oder Browser-Seite verwendet.";
+    }else if(String(err?.message).includes("NO_VIDEO_FRAMES")){
+      msg="Die Kamera wurde geöffnet, liefert aber kein Bild. Versuche 'Kamera wechseln' oder lade die Seite neu.";
+    }
+    setScannerStatus(msg,"error");
+    await enumerateScannerCameras();
+  }
+}
+
+async function switchScannerCamera(){
+  if(scannerStarting)return;
+
+  if(!scannerDevices.length){
+    await enumerateScannerCameras();
+  }
+  if(scannerDevices.length<2){
+    setScannerStatus("Es wurde keine zweite Kamera gefunden.","error");
+    return;
+  }
+
+  scannerDeviceIndex=(scannerDeviceIndex+1)%scannerDevices.length;
+  const device=scannerDevices[scannerDeviceIndex];
+
+  try{
+    setScannerStatus("Kamera wird gewechselt …","waiting");
+    await startCameraWithConstraints({
+      deviceId:{exact:device.deviceId},
+      width:{ideal:1280},
+      height:{ideal:960}
     });
-    scannerVideo.srcObject=scannerStream;
-    await scannerVideo.play();
-    setScannerStatus("Halte den QR-Code der Karte über die Frontkamera.");
+    setScannerStatus(`Kamera aktiv${device.label?": "+device.label:""}.`,"ok");
     scannerRaf=requestAnimationFrame(scanFrame);
   }catch(err){
     console.error(err);
-    setScannerStatus(
-      location.protocol==="https:"
-        ?"Kamerazugriff wurde nicht erlaubt oder die Frontkamera ist nicht verfügbar."
-        :"Die Kamera funktioniert nur über HTTPS. Öffne die GitHub-Pages-Version.",
-      true
-    );
+    setScannerStatus("Diese Kamera konnte nicht gestartet werden. Versuche erneut zu wechseln.","error");
   }
 }
 
@@ -3286,7 +3430,7 @@ function handleQrDetected(raw){
 
   const found=findCardByQr(raw);
   if(found.error){
-    setScannerStatus(found.error,true);
+    setScannerStatus(found.error,"error");
     scannerBusy=false;
     return;
   }
@@ -3296,25 +3440,30 @@ function handleQrDetected(raw){
   scannerCardName.textContent=found.card.name;
   scannerCardGroup.textContent=found.card.group;
   scannerResult.style.display="block";
-  setScannerStatus("Karte erkannt. Kurz bestätigen, dann wird sie gespielt.");
+  setScannerStatus("Karte erkannt. Kurz bestätigen, dann wird sie gespielt.","ok");
 }
 
 function scanFrame(){
   if(!scannerStream || scannerModal.style.display==="none")return;
 
-  if(scannerVideo.readyState>=2 && !scannerBusy){
+  if(scannerVideo.readyState>=2 && scannerVideo.videoWidth>0 && scannerVideo.videoHeight>0 && !scannerBusy){
     const w=scannerVideo.videoWidth;
     const h=scannerVideo.videoHeight;
-    if(w && h){
-      scannerCanvas.width=w;
-      scannerCanvas.height=h;
-      const ctx=scannerCanvas.getContext("2d",{willReadFrequently:true});
-      ctx.drawImage(scannerVideo,0,0,w,h);
-      const img=ctx.getImageData(0,0,w,h);
-      const code=jsQR(img.data,w,h,{inversionAttempts:"dontInvert"});
-      if(code?.data)handleQrDetected(code.data);
-    }
+
+    scannerCanvas.width=w;
+    scannerCanvas.height=h;
+
+    const ctx=scannerCanvas.getContext("2d",{willReadFrequently:true});
+
+    // The visible video is mirrored for natural front-camera use.
+    // Scan the raw video frame so QR orientation remains reliable.
+    ctx.drawImage(scannerVideo,0,0,w,h);
+
+    const img=ctx.getImageData(0,0,w,h);
+    const code=jsQR(img.data,w,h,{inversionAttempts:"attemptBoth"});
+    if(code?.data)handleQrDetected(code.data);
   }
+
   scannerRaf=requestAnimationFrame(scanFrame);
 }
 
@@ -3331,13 +3480,23 @@ window.addEventListener("DOMContentLoaded",()=>{
   const cancel=document.getElementById("scannerManualClose");
   const retry=document.getElementById("scannerRetry");
   const confirm=document.getElementById("scannerConfirm");
+  const switchCamera=document.getElementById("scannerSwitchCamera");
 
   if(scan)scan.addEventListener("click",openScanner);
   if(close)close.addEventListener("click",closeScanner);
   if(cancel)cancel.addEventListener("click",closeScanner);
-  if(retry)retry.addEventListener("click",resetScannerResult);
+  if(retry)retry.addEventListener("click",async()=>{
+    resetScannerResult();
+    if(scannerStream){
+      setScannerStatus("Scanner läuft weiter. Halte die Karte erneut über das Display.","ok");
+    }else{
+      try{await startPreferredCamera();}catch(e){}
+    }
+  });
   if(confirm)confirm.addEventListener("click",confirmScannedCard);
+  if(switchCamera)switchCamera.addEventListener("click",switchScannerCamera);
 });
+
 
 window.addEventListener("DOMContentLoaded",()=>{
   if(!REQUESTED_BOSS){
