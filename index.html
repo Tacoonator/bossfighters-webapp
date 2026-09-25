@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.10.6 – guided Boss Return
+   v1.11.0 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.10.6 – physical-table play / curated Boss Return
+   v1.11.0 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.10.6 – Frontkamera QR card scanner
+   v1.11.0 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.10.6 – robust camera handling
+   v1.11.0 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.10.6 – QR diagnostics
+   v1.11.0 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.10.6 – scan light + tolerant real-card QR mapping
+   v1.11.0 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1916,6 +1916,250 @@ input{
   .scannerLightBar{
     height:34px;
     margin-bottom:7px;
+  }
+}
+
+
+/* =========================================================
+   v1.11.0 – tablet bossboard layout
+   ========================================================= */
+.starterModalBox,
+.endGameModalBox{
+  width:min(92vw,460px);
+  text-align:center;
+  padding:22px !important;
+}
+.starterEyebrow{
+  font-size:.72rem;
+  letter-spacing:.18em;
+  color:#b6aa97;
+  margin-bottom:6px;
+}
+.starterButtons{
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+
+@media(min-width:760px){
+  .wrap{
+    max-width:none !important;
+    padding:0 !important;
+  }
+  .combatHeader{
+    display:none !important;
+  }
+  .top{
+    display:block !important;
+  }
+  .bossStage{
+    min-height:100svh;
+    margin:0;
+  }
+  .bossStage .bossPanel{
+    min-height:100svh !important;
+    border-radius:0 !important;
+    border-left:0 !important;
+    border-right:0 !important;
+    border-top:0 !important;
+  }
+  .bossPanel::before{
+    background:
+      linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.05) 34%,rgba(0,0,0,.68)),
+      url("assets/bosses/hellmo-crazby.png") center 42% / cover no-repeat !important;
+  }
+  .bossPanel .headbox{
+    padding:18px 22px 12px !important;
+    max-width:calc(100% - 180px);
+    background:linear-gradient(180deg,rgba(0,0,0,.92),rgba(0,0,0,.45),transparent) !important;
+  }
+  .bossSubtitle{
+    font-size:.92rem;
+  }
+  .bossVitals{
+    min-width:220px !important;
+  }
+  .attacks{
+    display:none !important;
+  }
+  .heroPanel{
+    display:none !important;
+  }
+  #mobileHeroBar{
+    display:none !important;
+  }
+  .scanDock{
+    display:none !important;
+  }
+  .actionBanner{
+    position:fixed;
+    left:18px;
+    right:18px;
+    bottom:12px;
+    z-index:25;
+    border-radius:18px;
+  }
+  .cardsPanel,
+  .logcol{
+    margin:18px;
+  }
+
+  .tabletHeroLayer{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:3;
+  }
+  .tabletHeroMarker{
+    position:absolute;
+    top:92px;
+    width:min(240px,26vw);
+    padding:14px 14px 12px;
+    background:linear-gradient(180deg,rgba(10,12,15,.95),rgba(10,12,15,.78));
+    border:1px solid rgba(235,224,208,.36);
+    box-shadow:0 10px 30px rgba(0,0,0,.32);
+    pointer-events:auto;
+    backdrop-filter:blur(4px);
+  }
+  .tabletHeroMarker.left{left:18px;border-radius:16px 18px 18px 16px;}
+  .tabletHeroMarker.right{right:18px;border-radius:18px 16px 16px 18px;}
+  .tabletHeroMarker.active{
+    border-color:#d8b763;
+    box-shadow:0 0 0 1px rgba(216,183,99,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  .tabletHeroTop{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .tabletHeroName{
+    font-family:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    letter-spacing:.05em;
+    font-size:1.15rem;
+  }
+  .tabletHeroActions{
+    text-align:right;
+    font-size:.82rem;
+    color:#d9cfbf;
+  }
+  .tabletHeroAttackLabel{
+    font-size:.72rem;
+    letter-spacing:.14em;
+    color:#b5aa98;
+    margin-bottom:4px;
+  }
+  .tabletHeroAttack{
+    font-size:2.6rem;
+    font-weight:900;
+    line-height:1;
+    margin-bottom:8px;
+  }
+  .tabletHeroStatus{
+    min-height:38px;
+    font-size:.9rem;
+    color:#eee2cc;
+  }
+
+  .tabletHudRail{
+    position:absolute;
+    right:18px;
+    top:92px;
+    display:grid;
+    gap:10px;
+    width:148px;
+    z-index:4;
+  }
+  .tabletHudChip{
+    display:grid;
+    gap:4px;
+    padding:12px 12px 10px;
+    text-align:center;
+    background:linear-gradient(180deg,rgba(10,12,15,.95),rgba(10,12,15,.78));
+    border:1px solid rgba(235,224,208,.36);
+    box-shadow:0 10px 30px rgba(0,0,0,.32);
+    backdrop-filter:blur(4px);
+  }
+  .tabletHudChip span{
+    font-size:.72rem;
+    letter-spacing:.14em;
+    color:#b5aa98;
+  }
+  .tabletHudChip b{
+    font-size:1.45rem;
+  }
+  .tabletHudButton,
+  .tabletHudDanger{
+    min-height:50px;
+    font-size:.95rem;
+    width:100%;
+  }
+  .tabletHudDanger{
+    background:#3b1316 !important;
+    border-color:#7a3237 !important;
+  }
+
+  .sand{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:108px;
+    width:min(320px,32vw);
+    margin:0 !important;
+    text-align:center;
+    background:linear-gradient(180deg,rgba(8,9,12,.84),rgba(8,9,12,.56)) !important;
+    backdrop-filter:blur(3px);
+  }
+  .shields{
+    position:absolute;
+    left:50%;
+    bottom:88px;
+    transform:translateX(-50%);
+    width:min(520px,54vw);
+    margin:0 !important;
+    padding:12px !important;
+    background:linear-gradient(180deg,rgba(6,7,9,.9),rgba(6,7,9,.72));
+    border:1px solid rgba(235,224,208,.36);
+    border-radius:20px;
+    grid-template-columns:1fr 1fr 1fr !important;
+    gap:10px !important;
+    backdrop-filter:blur(4px);
+    box-shadow:0 10px 28px rgba(0,0,0,.34);
+  }
+  .shield{
+    min-height:88px;
+    border-radius:16px !important;
+    background:linear-gradient(180deg,rgba(18,21,25,.96),rgba(10,12,15,.92)) !important;
+  }
+  .shield b{
+    font-size:1rem;
+    letter-spacing:.05em;
+  }
+  .shield div[id^="s"]{
+    font-size:2rem;
+    font-weight:900;
+    line-height:1.1;
+  }
+  .shield.effect{
+    box-shadow:0 0 0 1px rgba(216,183,99,.34),0 0 18px rgba(216,183,99,.2);
+  }
+}
+
+@media(min-width:760px) and (max-width:1024px){
+  .tabletHeroMarker{
+    width:min(210px,28vw);
+    top:88px;
+  }
+  .tabletHudRail{
+    width:132px;
+    top:88px;
+  }
+  .bossPanel .headbox{
+    max-width:calc(100% - 160px);
+  }
+  .shields{
+    width:min(470px,60vw);
   }
 }
 
@@ -1954,6 +2198,46 @@ input{
           </div>
           <div class="hpbar"><div id="hpbar" style="width:100%"></div></div>
         </div>
+      </div>
+
+
+      <div class="tabletHeroLayer" aria-hidden="false">
+        <div id="tabletHeroP1" class="tabletHeroMarker left">
+          <div class="tabletHeroTop">
+            <span class="tabletHeroName">Assassine</span>
+            <span class="tabletHeroActions"><b id="tabletP1Actions">3</b> Aktionen</span>
+          </div>
+          <div class="tabletHeroAttackLabel">Bossangriff</div>
+          <div id="tabletP1Attack" class="tabletHeroAttack">0</div>
+          <div id="tabletP1Status" class="tabletHeroStatus">Kein Status</div>
+        </div>
+
+        <div id="tabletHeroP2" class="tabletHeroMarker right">
+          <div class="tabletHeroTop">
+            <span class="tabletHeroName">Krieger</span>
+            <span class="tabletHeroActions"><b id="tabletP2Actions">3</b> Aktionen</span>
+          </div>
+          <div class="tabletHeroAttackLabel">Bossangriff</div>
+          <div id="tabletP2Attack" class="tabletHeroAttack">0</div>
+          <div id="tabletP2Status" class="tabletHeroStatus">Kein Status</div>
+        </div>
+      </div>
+
+      <div class="tabletHudRail">
+        <div class="tabletHudChip">
+          <span>Runde</span>
+          <b id="tabletRound">1</b>
+        </div>
+        <div class="tabletHudChip">
+          <span>Boss-LP</span>
+          <b id="tabletBossHp">90</b>
+        </div>
+        <div class="tabletHudChip">
+          <span>Aktiv</span>
+          <b id="tabletHead">HELLMO</b>
+        </div>
+        <button id="tabletScanButton" class="primary tabletHudButton" type="button">▣ QR scannen</button>
+        <button id="openEndGame" class="tabletHudDanger" type="button">Kampf beenden</button>
       </div>
 
       <div class="attacks">
@@ -2082,6 +2366,43 @@ input{
 </div>
 
 
+
+
+<div id="starterModal" class="modal" style="display:flex">
+  <div class="modalbox starterModalBox">
+    <div class="starterEyebrow">HELDENRUNDE</div>
+    <h3>Wer beginnt?</h3>
+    <p class="muted">Wählt, welcher Held die erste Aktion dieser Runde ausführt.</p>
+    <div class="starterButtons">
+      <button class="primary" type="button" onclick="chooseStarter('p1')">Assassine beginnt</button>
+      <button type="button" onclick="chooseStarter('p2')">Krieger beginnt</button>
+    </div>
+  </div>
+</div>
+
+<div id="endGameModal" class="modal" style="display:none">
+  <div class="modalbox endGameModalBox">
+    <div class="starterEyebrow">KAMPF BEENDEN</div>
+    <h3>Kampfstatus wählen</h3>
+    <p class="muted">Nutzt das, wenn ein Held stirbt oder der Boss besiegt ist.</p>
+    <div class="starterButtons">
+      <button class="primary" type="button" onclick="finishGame('Boss besiegt')">Boss besiegt</button>
+      <button type="button" onclick="finishGame('Held gestorben')">Held gestorben</button>
+      <button type="button" onclick="closeEndGameModal()">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<div id="gameOverModal" class="modal" style="display:none">
+  <div class="modalbox starterModalBox">
+    <div class="starterEyebrow">KAMPF BEENDET</div>
+    <h3 id="gameOverTitle">Kampf beendet</h3>
+    <p id="gameOverText" class="muted">Der Kampf ist vorbei.</p>
+    <div class="starterButtons">
+      <button class="primary" type="button" onclick="location.reload()">Neuen Kampf starten</button>
+    </div>
+  </div>
+</div>
 
 <div id="scannerModal" class="modal scannerModal" style="display:none">
   <div class="scannerBox">
@@ -3148,6 +3469,10 @@ function renderActionPips(){
   const mh2=document.getElementById("mobileHeroP2");
   if(mh1)mh1.classList.toggle("active",active==="p1");
   if(mh2)mh2.classList.toggle("active",active==="p2");
+  if(window.tabletHeroP1) tabletHeroP1.classList.toggle("active",active==="p1");
+  if(window.tabletHeroP2) tabletHeroP2.classList.toggle("active",active==="p2");
+  if(window.tabletP1Actions) tabletP1Actions.textContent=heroActionsLeft("p1");
+  if(window.tabletP2Actions) tabletP2Actions.textContent=heroActionsLeft("p2");
 }
 
 function renderActionBanner(){
@@ -3195,6 +3520,35 @@ function renderActionBanner(){
   if(window.actionWho) actionWho.textContent=who;
 }
 
+
+function heroActionsLeft(p){
+  return S.queue.filter(x=>x===p).length;
+}
+
+function chooseStarter(p){
+  S.start=p;
+  if(window.startPlayer) startPlayer.value=p;
+  buildQueue();
+  render();
+  if(window.starterModal) starterModal.style.display="none";
+  log(`Startspieler gewählt: ${N[p]}.`);
+}
+
+function openEndGameModal(){
+  if(window.endGameModal) endGameModal.style.display="flex";
+}
+function closeEndGameModal(){
+  if(window.endGameModal) endGameModal.style.display="none";
+}
+function finishGame(reason){
+  closeEndGameModal();
+  if(window.gameOverTitle) gameOverTitle.textContent=reason;
+  if(window.gameOverText) gameOverText.textContent=reason==="Boss besiegt"
+    ? "HELLMO & Crazby wurden besiegt."
+    : "Ein Held ist gefallen. Der Kampf ist beendet.";
+  if(window.gameOverModal) gameOverModal.style.display="flex";
+  log(`🏁 Kampf beendet: ${reason}.`);
+}
 function render(){
  bossHp.textContent=S.bossHp;bossPoison.textContent=S.bossPoison;round.textContent=S.round;headName.textContent=S.head;headName.className="headname "+(S.head==="HELLMO"?"orange":"tux");hpbar.style.width=(100*S.bossHp/S.maxHp)+"%";
  if(window.roundTop) roundTop.textContent=S.round;
@@ -3214,6 +3568,17 @@ function render(){
  if(window.nextHeroTop) nextHeroTop.textContent=activeHero?N[activeHero]:"Boss-Return";
  fullBlockBox.style.display=S.fullBlockCount>0?"block":"none";
  for(const t of ["melee","ranged","magic"]){let box=document.getElementById(t==="melee"?"shieldMeleeBox":t==="ranged"?"shieldRangedBox":"shieldMagicBox");box.className="shield"+(S.head==="HELLMO"&&S.orangeEffectShield===t&&S.orangeShieldEffect?" effect":"");let lab=document.getElementById(t==="melee"?"sem":t==="ranged"?"ser":"seg");lab.textContent=S.head==="HELLMO"&&S.orangeEffectShield===t&&S.orangeShieldEffect?S.orangeShieldEffect:""}
+ if(window.tabletRound) tabletRound.textContent=S.round;
+ if(window.tabletBossHp) tabletBossHp.textContent=S.bossHp;
+ if(window.tabletHead) tabletHead.textContent=S.head;
+ if(window.tabletP1Attack) tabletP1Attack.textContent=S.incoming.p1?.current??0;
+ if(window.tabletP2Attack) tabletP2Attack.textContent=S.incoming.p2?.current??0;
+ if(window.tabletP1Status) tabletP1Status.textContent=S.incoming.p1?.status?`+ ${S.incoming.p1.status} bei Treffer`:"Kein Status";
+ if(window.tabletP2Status) tabletP2Status.textContent=S.incoming.p2?.status?`+ ${S.incoming.p2.status} bei Treffer`:"Kein Status";
+ if(window.tabletP1Actions) tabletP1Actions.textContent=heroActionsLeft("p1");
+ if(window.tabletP2Actions) tabletP2Actions.textContent=heroActionsLeft("p2");
+ if(window.tabletHeroP1) tabletHeroP1.classList.toggle("active",activeHero==="p1");
+ if(window.tabletHeroP2) tabletHeroP2.classList.toggle("active",activeHero==="p2");
  renderActionBanner();
  renderActionPips();
  renderCards()
@@ -3762,6 +4127,21 @@ window.addEventListener("DOMContentLoaded",()=>{
   }
 
   document.documentElement.dataset.bossId = REQUESTED_BOSS_ID;
+});
+
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const tabletScan=document.getElementById("tabletScanButton");
+  if(tabletScan){
+    tabletScan.addEventListener("click",()=>openScanner());
+  }
+  const endBtn=document.getElementById("openEndGame");
+  if(endBtn){
+    endBtn.addEventListener("click",openEndGameModal);
+  }
+  if(window.starterModal){
+    starterModal.style.display="flex";
+  }
 });
 
 </script>
