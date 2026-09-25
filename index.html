@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.10.3 – guided Boss Return
+   v1.10.4 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.10.3 – physical-table play / curated Boss Return
+   v1.10.4 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.10.3 – Frontkamera QR card scanner
+   v1.10.4 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.10.3 – robust camera handling
+   v1.10.4 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.10.3 – QR diagnostics
+   v1.10.4 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -2061,7 +2061,7 @@ input{
   <div class="scannerBox">
     <div class="scannerTop">
       <div>
-        <div class="scannerEyebrow">KARTE SCANNEN</div>
+        <div class="scannerEyebrow">KARTE SCANNEN · 25 QR-CODES HINTERLEGT</div>
         <h3 id="scannerTitle">Frontkamera</h3>
       </div>
       <button id="scannerClose" class="scannerClose" type="button">✕</button>
@@ -3213,6 +3213,9 @@ let scannerLastTime=0;
 let scannerDevices=[];
 let scannerDeviceIndex=0;
 let scannerStarting=false;
+let nativeQrDetector=null;
+let nativeQrSupported=false;
+let lastNativeScan=0;
 
 const scannerUI = {};
 function initScannerUI(){
@@ -3232,6 +3235,34 @@ function initScannerUI(){
   scannerUI.retry=document.getElementById("scannerRetry");
   scannerUI.confirm=document.getElementById("scannerConfirm");
 }
+
+const REAL_CARD_QR = {
+  'GgAAAA==': 'Morgenstern',
+  'GAAAAA==': 'Wampenschoner',
+  'HQAAAA==': 'Titan-Armschienen',
+  'FgAAAA==': 'Stollensprenger',
+  'GQAAAA==': 'Schlagring',
+  'FQAAAA==': 'Felsspalter',
+  'HAAAAA==': 'Runenstein',
+  'VQEAAA==': 'Anti-Boss-3000',
+  'GwAAAA=': 'Rune des Königs',
+  'HgAAAA=': 'Gardehelm',
+  'NwAAAA==': 'Schwert der Rubingarde',
+  'OAAAAA==': 'Amulett des Bären',
+  'OwAAAA==': 'Klingenblitz',
+  'PAAAAA==': 'Kettenhemd',
+  'OQAAAA==': 'Hand-Armbrust',
+  'OgAAAA==': 'Wurfdolche',
+  'WgEAAA==': 'Rune der Rache',
+  'PQAAAA==': 'Ritterlicher Beistand',
+  'PgAAAA==': 'Finte',
+  'PwAAAA==': 'Schulterdornen',
+  'TQEAAA==': 'Heiltrank',
+  'GQEAAA==': 'Lebendige Stiefel',
+  'DgEAAA==': 'Anspornen',
+  'CgEAAA==': 'Geweihte Schulterplatten',
+  'FQEAAA==': 'Magische Haut'
+};
 
 function normalizeCardId(value){
   return String(value||"")
@@ -3265,22 +3296,43 @@ function activeCardPlayer(){
         :currentHero()));
 }
 
+
 function findCardByQr(raw){
-  const id=qrPayloadToCardId(raw);
   const p=activeCardPlayer();
   if(!p)return {error:"Während des Boss-Returns können keine Heldenkarten gespielt werden."};
 
+  const rawValue=String(raw||"").trim();
+  const mappedName=REAL_CARD_QR[rawValue] || null;
+
   const current=[...DB[p],...DB.common];
+
+  if(mappedName){
+    const mapped=current.find(c=>c.name===mappedName);
+    if(mapped)return {card:mapped,p,raw:rawValue,mappedName};
+
+    const otherP=p==="p1"?"p2":"p1";
+    const wrongHero=DB[otherP].find(c=>c.name===mappedName);
+    if(wrongHero){
+      return {error:`${wrongHero.name} gehört nicht zum aktuell handelnden Helden.`,raw:rawValue,mappedName};
+    }
+
+    return {error:`QR erkannt: ${mappedName}. Diese Karte ist für den aktuellen Spielzustand nicht verfügbar.`,raw:rawValue,mappedName};
+  }
+
+  // Fallback for our own future CARD:name QR format.
+  const id=qrPayloadToCardId(rawValue);
   const card=current.find(c=>normalizeCardId(c.name)===id);
-  if(card)return {card,p,id};
+  if(card)return {card,p,id,raw:rawValue};
 
   const otherP=p==="p1"?"p2":"p1";
   const wrongHero=DB[otherP].find(c=>normalizeCardId(c.name)===id);
   if(wrongHero){
-    return {error:`${wrongHero.name} gehört nicht zum aktuell handelnden Helden.`};
+    return {error:`${wrongHero.name} gehört nicht zum aktuell handelnden Helden.`,raw:rawValue};
   }
-  return {error:"Dieser QR-Code gehört zu keiner bekannten Karte.",id};
+
+  return {error:"QR-Code erkannt, aber noch keiner bekannten Karte zugeordnet.",id,raw:rawValue};
 }
+
 
 function setScannerStatus(text,state=""){
   if(!scannerUI.status)return;
@@ -3389,7 +3441,7 @@ async function startPreferredCamera(){
       height:{ideal:960}
     });
     await enumerateScannerCameras();
-    setScannerStatus("Frontkamera aktiv – QR-Code über das Display halten.","ok");
+    setScannerStatus(`Frontkamera aktiv – Scanner bereit${nativeQrSupported?" (native + jsQR)":" (jsQR)"}.`,"ok");
     scannerRaf=requestAnimationFrame(scanFrame);
     return;
   }catch(firstError){
@@ -3403,13 +3455,22 @@ async function startPreferredCamera(){
     height:{ideal:960}
   });
   await enumerateScannerCameras();
-  setScannerStatus("Kamera aktiv – QR-Code über das Display halten.","ok");
+  setScannerStatus(`Kamera aktiv – Scanner bereit${nativeQrSupported?" (native + jsQR)":" (jsQR)"}.`,"ok");
   scannerRaf=requestAnimationFrame(scanFrame);
 }
 
 async function openScanner(){
   try{
     if(!scannerUI.modal)initScannerUI();
+  if("BarcodeDetector" in window){
+    try{
+      nativeQrDetector=new BarcodeDetector({formats:["qr_code"]});
+      nativeQrSupported=true;
+    }catch(e){
+      nativeQrDetector=null;
+      nativeQrSupported=false;
+    }
+  }
     if(!scannerUI.modal || !scannerUI.video || !scannerUI.status){
       alert("Scanner-Oberfläche konnte nicht initialisiert werden.");
       return;
@@ -3502,7 +3563,7 @@ function handleQrDetected(raw){
     scannerDetectedCard=found.card;
     if(scannerUI.confirm)scannerUI.confirm.textContent="Karte spielen";
     if(scannerUI.cardName)scannerUI.cardName.textContent=found.card.name;
-    if(scannerUI.cardGroup)scannerUI.cardGroup.textContent=`Bekannte Karte · ${found.card.group}`;
+    if(scannerUI.cardGroup)scannerUI.cardGroup.textContent=`Echte Karten-ID erkannt · ${found.card.group}`;
     if(scannerUI.result)scannerUI.result.style.display="block";
     setScannerStatus("QR-Code erkannt und einer bekannten Karte zugeordnet.","ok");
     return;
@@ -3519,28 +3580,56 @@ function handleQrDetected(raw){
 }
 
 
-function scanFrame(){
+
+async function scanFrame(){
   const v=scannerUI.video;
   const canvas=scannerUI.canvas;
 
   if(!scannerStream || !v || !canvas || scannerUI.modal?.style.display==="none")return;
 
   if(v.readyState>=2 && v.videoWidth>0 && v.videoHeight>0 && !scannerBusy){
-    const w=v.videoWidth;
-    const h=v.videoHeight;
-    canvas.width=w;
-    canvas.height=h;
+    let foundRaw=null;
 
-    const ctx=canvas.getContext("2d",{willReadFrequently:true});
-    ctx.drawImage(v,0,0,w,h);
+    // Prefer the browser's native QR detector when available.
+    if(nativeQrSupported && nativeQrDetector && Date.now()-lastNativeScan>180){
+      lastNativeScan=Date.now();
+      try{
+        const codes=await nativeQrDetector.detect(v);
+        if(codes?.length && codes[0].rawValue){
+          foundRaw=codes[0].rawValue;
+        }
+      }catch(e){
+        // Keep jsQR as fallback.
+      }
+    }
 
-    const img=ctx.getImageData(0,0,w,h);
-    const code=jsQR(img.data,w,h,{inversionAttempts:"attemptBoth"});
-    if(code?.data)handleQrDetected(code.data);
+    if(!foundRaw && typeof jsQR==="function"){
+      const w=v.videoWidth;
+      const h=v.videoHeight;
+
+      // Downscale large camera frames for faster and often more stable decoding.
+      const maxW=960;
+      const scale=Math.min(1,maxW/w);
+      const sw=Math.max(320,Math.round(w*scale));
+      const sh=Math.max(240,Math.round(h*scale));
+
+      canvas.width=sw;
+      canvas.height=sh;
+
+      const ctx=canvas.getContext("2d",{willReadFrequently:true});
+      ctx.drawImage(v,0,0,sw,sh);
+
+      const img=ctx.getImageData(0,0,sw,sh);
+      const code=jsQR(img.data,sw,sh,{inversionAttempts:"attemptBoth"});
+      if(code?.data)foundRaw=code.data;
+    }
+
+    if(foundRaw)handleQrDetected(foundRaw);
   }
 
   scannerRaf=requestAnimationFrame(scanFrame);
 }
+
 
 function confirmScannedCard(){
   if(scannerDetectedCard){
