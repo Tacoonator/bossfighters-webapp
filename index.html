@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – guided Boss Return
+   v1.11.7 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – physical-table play / curated Boss Return
+   v1.11.7 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – Frontkamera QR card scanner
+   v1.11.7 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – robust camera handling
+   v1.11.7 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – QR diagnostics
+   v1.11.7 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – scan light + tolerant real-card QR mapping
+   v1.11.7 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – tablet bossboard layout
+   v1.11.7 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – tablet HUD cleanup + hero feedback
+   v1.11.7 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – compact symbolic tablet heroes
+   v1.11.7 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – lower heroes, boss seals & battle intro
+   v1.11.7 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2607,7 +2607,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – lower heroes + prominent dismissible feedback
+   v1.11.7 – lower heroes + prominent dismissible feedback
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2687,7 +2687,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – confirmable combat feedback between heroes
+   v1.11.7 – confirmable combat feedback between heroes
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2776,7 +2776,7 @@ input{
 
 
 /* =========================================================
-   v1.11.6 – centered confirmed combat feedback + log drawer
+   v1.11.7 – centered confirmed combat feedback + log drawer
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -2880,6 +2880,76 @@ input{
   }
   #bossReturnModal .bossReturnModalBox{
     width:min(335px,40vw) !important;
+  }
+}
+
+
+/* =========================================================
+   v1.11.7 – dedicated HELLMO shield reaction popup
+   ========================================================= */
+.shieldReactionModal{
+  z-index:145 !important;
+  background:rgba(0,0,0,.12) !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  padding-top:250px !important;
+  pointer-events:none;
+}
+.shieldReactionBox{
+  width:min(360px,38vw);
+  min-height:0 !important;
+  padding:18px 18px 15px !important;
+  text-align:center;
+  pointer-events:auto;
+  border:2px solid #d1a34f !important;
+  border-radius:16px !important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(214,162,79,.12),transparent 38%),
+    linear-gradient(180deg,rgba(21,23,27,.99),rgba(7,9,11,.99)) !important;
+  box-shadow:0 18px 55px rgba(0,0,0,.65),0 0 22px rgba(214,162,79,.13);
+}
+.shieldReactionEyebrow{
+  font-size:.63rem;
+  letter-spacing:.18em;
+  color:#c8b27d;
+}
+.shieldReactionIcon{
+  width:56px;
+  height:56px;
+  display:grid;
+  place-items:center;
+  margin:9px auto 7px;
+  border-radius:50%;
+  border:1px solid rgba(230,207,155,.45);
+  background:#0a0c0f;
+  font-size:1.7rem;
+}
+#shieldReactionHero{
+  margin:2px 0 7px !important;
+  font-size:1rem !important;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#c8c0b4;
+}
+.shieldReactionText{
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  font-size:1.55rem;
+  line-height:1.1;
+  letter-spacing:.025em;
+  color:#fff;
+}
+#shieldReactionConfirm{
+  width:100%;
+  min-height:44px;
+  margin-top:15px;
+  font-weight:800;
+}
+@media(max-width:759px){
+  .shieldReactionModal{
+    padding-top:24vh !important;
+  }
+  .shieldReactionBox{
+    width:min(90vw,390px);
   }
 }
 
@@ -3210,6 +3280,17 @@ input{
   </div>
 </div>
 
+
+<div id="shieldReactionModal" class="modal shieldReactionModal" style="display:none">
+  <div class="modalbox shieldReactionBox">
+    <div class="shieldReactionEyebrow">SCHILDREAKTION</div>
+    <div id="shieldReactionIcon" class="shieldReactionIcon">⚠</div>
+    <h3 id="shieldReactionHero">Assassine</h3>
+    <div id="shieldReactionText" class="shieldReactionText"></div>
+    <button id="shieldReactionConfirm" class="primary" type="button">Bestätigen</button>
+  </div>
+</div>
+
 <div id="bossReturnModal" class="modal" style="display:none">
   <div class="modalbox bossReturnModalBox">
     <div class="bossReturnStepLabel">BOSS-RETURN</div>
@@ -3303,7 +3384,7 @@ const S={
   fullBlockCount:0,fullBlockMode:false,
   damageTypesPlayed:{melee:false,ranged:false,magic:false},pool:"deck",
   pendingCard:null, pendingShieldCard:null, pendingRedirect:null,
-  pendingEffectSequence:null, chainedAction:null, improvisieren:null, muteHeroFeedback:false, heroFeedbackQueue:[], heroFeedbackOpen:false
+  pendingEffectSequence:null, chainedAction:null, improvisieren:null, muteHeroFeedback:false, heroFeedbackQueue:[], heroFeedbackOpen:false, shieldReactionQueue:[], shieldReactionOpen:false
 };
 function log(x){
  if(S.captureBossReturn && typeof x==="string") S.bossReturnSteps.push(x);logEl.textContent+=x+"\n";logEl.scrollTop=logEl.scrollHeight}
@@ -3456,18 +3537,58 @@ function resolvePendingCrazbySwap(triggerType){
     crazbySwap(triggerType);
   }
 }
+
+function enqueueShieldReaction(p,text,icon){
+  S.shieldReactionQueue.push({p,text,icon});
+  showNextShieldReaction();
+}
+
+function showNextShieldReaction(){
+  if(S.shieldReactionOpen || !S.shieldReactionQueue.length)return;
+
+  const item=S.shieldReactionQueue.shift();
+  const modal=document.getElementById("shieldReactionModal");
+  const hero=document.getElementById("shieldReactionHero");
+  const text=document.getElementById("shieldReactionText");
+  const icon=document.getElementById("shieldReactionIcon");
+
+  if(!modal || !hero || !text || !icon)return;
+
+  S.shieldReactionOpen=true;
+  hero.textContent=N[item.p];
+  text.textContent=item.text;
+  icon.textContent=item.icon;
+  modal.style.display="flex";
+}
+
+function confirmShieldReaction(){
+  const modal=document.getElementById("shieldReactionModal");
+  if(modal)modal.style.display="none";
+  S.shieldReactionOpen=false;
+  showNextShieldReaction();
+}
+
 function triggerHellmoShieldEffect(p,type){
   if(S.head!=="HELLMO" || type!==S.orangeEffectShield || !S.orangeShieldEffect) return;
+
   const e=S.orangeShieldEffect;
+
   if(e==="Panik"){
     log(`⚠ HELLMO-Schild: ${N[p]} erhält 1 Panik.`);
-    showHeroStatusFeedback(p,"Panik",1);
+    enqueueShieldReaction(p,"Nimm 1 Panik.","⚠");
   }else if(e==="Rückschlag"){
+    // Rückschlag ist echter Heldenschaden, aber die Rückmeldung
+    // läuft bewusst ausschließlich über das Schildreaktions-Popup.
+    const oldMute=S.muteHeroFeedback;
+    S.muteHeroFeedback=true;
     heroDamage(p,2);
+    S.muteHeroFeedback=oldMute;
+
     log(`⚠ HELLMO-Schild: Rückschlag – ${N[p]} erhält 2 Schaden.`);
+    enqueueShieldReaction(p,"2 Schaden durch Rückschlag.","💥");
   }else{
     log(`⚠ HELLMO-Schild: ${N[p]} erhält 1 Lähmung.`);
-    showHeroStatusFeedback(p,"Lähmung",1);
+    enqueueShieldReaction(p,"Nimm 1 Lähmung.","⛓");
   }
 }
 
@@ -5040,6 +5161,14 @@ window.addEventListener("DOMContentLoaded",()=>{
     tabletLogClose.addEventListener("click",()=>{
       logColumn.classList.remove("mobileOpen");
     });
+  }
+});
+
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const shieldReactionConfirm=document.getElementById("shieldReactionConfirm");
+  if(shieldReactionConfirm){
+    shieldReactionConfirm.addEventListener("click",confirmShieldReaction);
   }
 });
 
