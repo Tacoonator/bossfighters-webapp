@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.0 – guided Boss Return
+   v1.11.1 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.0 – physical-table play / curated Boss Return
+   v1.11.1 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.0 – Frontkamera QR card scanner
+   v1.11.1 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.0 – robust camera handling
+   v1.11.1 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.0 – QR diagnostics
+   v1.11.1 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.0 – scan light + tolerant real-card QR mapping
+   v1.11.1 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.0 – tablet bossboard layout
+   v1.11.1 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2163,6 +2163,162 @@ input{
   }
 }
 
+
+/* =========================================================
+   v1.11.1 – tablet HUD cleanup + hero feedback
+   ========================================================= */
+.heroFeedbackLayer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:80;
+}
+.heroFeedbackToast{
+  position:absolute;
+  left:50%;
+  top:18%;
+  transform:translate(-50%,-12px) scale(.96);
+  min-width:220px;
+  max-width:min(72vw,520px);
+  padding:12px 18px;
+  text-align:center;
+  font-weight:900;
+  font-size:1.05rem;
+  letter-spacing:.02em;
+  color:#fff;
+  background:rgba(8,10,13,.94);
+  border:1px solid rgba(235,224,208,.5);
+  border-radius:14px;
+  box-shadow:0 12px 34px rgba(0,0,0,.42);
+  opacity:0;
+  animation:heroFeedbackIn 2.25s ease forwards;
+}
+.heroFeedbackToast.damage{border-color:#b75656;}
+.heroFeedbackToast.status{border-color:#d0ad58;}
+.heroFeedbackToast.heal{border-color:#6ca477;}
+@keyframes heroFeedbackIn{
+  0%{opacity:0;transform:translate(-50%,-12px) scale(.96)}
+  10%,72%{opacity:1;transform:translate(-50%,0) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-5px) scale(.98)}
+}
+
+@media(min-width:760px){
+  .bossPanel .headbox{
+    max-width:420px !important;
+    padding:18px 22px 10px !important;
+  }
+  .bossPanel .bossVitals{
+    display:none !important;
+  }
+
+  .sand{
+    display:none !important;
+  }
+
+  .tabletHeroMarker.left{
+    left:18px !important;
+    right:auto !important;
+  }
+  .tabletHeroMarker.right{
+    right:18px !important;
+    left:auto !important;
+  }
+
+  /* Shields become the visual center of the interface */
+  .shields{
+    left:50% !important;
+    bottom:132px !important;
+    width:min(560px,58vw) !important;
+  }
+  .shield{
+    min-height:104px !important;
+    padding:10px 8px !important;
+    overflow:visible !important;
+  }
+  .shield .small{
+    min-height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:4px;
+    padding:3px 6px;
+    border-radius:999px;
+    font-size:.82rem !important;
+    line-height:1.1;
+    font-weight:900;
+    color:#f5e6bd !important;
+    background:rgba(139,94,32,.34);
+  }
+  .shield .small:empty{
+    visibility:hidden;
+  }
+  .shield.effect .small{
+    visibility:visible;
+    background:rgba(168,83,36,.72);
+    border:1px solid rgba(255,202,123,.48);
+    box-shadow:0 0 14px rgba(235,151,58,.2);
+  }
+
+  /* Bottom HUD instead of right-hand rail */
+  .tabletHudRail{
+    position:absolute !important;
+    left:18px !important;
+    right:18px !important;
+    top:auto !important;
+    bottom:16px !important;
+    width:auto !important;
+    display:grid !important;
+    grid-template-columns:110px 130px 130px minmax(150px,1fr) minmax(150px,1fr);
+    gap:8px !important;
+    align-items:stretch;
+    z-index:35 !important;
+  }
+  .tabletHudChip{
+    min-height:58px;
+    padding:8px 10px !important;
+    justify-content:center;
+  }
+  .tabletHudChip span{
+    font-size:.66rem !important;
+  }
+  .tabletHudChip b{
+    font-size:1.2rem !important;
+  }
+  .tabletHudButton,
+  .tabletHudDanger{
+    min-height:58px !important;
+  }
+
+  /* Hero markers stay at the edges without competing with bottom HUD */
+  .tabletHeroMarker{
+    top:88px !important;
+    width:min(230px,25vw) !important;
+  }
+
+  /* The old action banner is redundant in fullscreen tablet mode */
+  .actionBanner{
+    display:none !important;
+  }
+}
+
+@media(min-width:760px) and (max-width:900px){
+  .tabletHudRail{
+    grid-template-columns:82px 100px 105px 1fr 1fr !important;
+  }
+  .tabletHudChip{
+    padding:6px !important;
+  }
+  .tabletHudButton,
+  .tabletHudDanger{
+    font-size:.82rem !important;
+    padding:8px !important;
+  }
+  .shields{
+    bottom:126px !important;
+    width:min(500px,62vw) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2189,7 +2345,7 @@ input{
       <div class="headbox">
         <div>
           <div id="headName" class="headname orange">HELLMO</div>
-          <div class="bossSubtitle">Bossrunde <span id="round">1</span> · gemeinsamer Lebenspool</div>
+          <span id="round" style="display:none">1</span>
         </div>
         <div class="bossVitals">
           <div class="bossVitalsTop">
@@ -2200,6 +2356,8 @@ input{
         </div>
       </div>
 
+
+      <div id="heroFeedbackLayer" class="heroFeedbackLayer" aria-live="polite"></div>
 
       <div class="tabletHeroLayer" aria-hidden="false">
         <div id="tabletHeroP1" class="tabletHeroMarker left">
@@ -2253,10 +2411,9 @@ input{
         </div>
       </div>
 
-      <div class="sand">
-        <div class="sandLabel">⌛ Verdeckte Sanduhr-Fähigkeit</div>
-        <div id="sandName"><b>Keine Sanduhr-Fähigkeit</b></div>
-        <div id="sandDetail" class="small muted"></div>
+      <div class="sand" style="display:none">
+        <div id="sandName"></div>
+        <div id="sandDetail"></div>
       </div>
 
       <div class="shields">
@@ -2547,7 +2704,7 @@ const S={
   fullBlockCount:0,fullBlockMode:false,
   damageTypesPlayed:{melee:false,ranged:false,magic:false},pool:"deck",
   pendingCard:null, pendingShieldCard:null, pendingRedirect:null,
-  pendingEffectSequence:null, chainedAction:null, improvisieren:null
+  pendingEffectSequence:null, chainedAction:null, improvisieren:null, muteHeroFeedback:false
 };
 function log(x){
  if(S.captureBossReturn && typeof x==="string") S.bossReturnSteps.push(x);logEl.textContent+=x+"\n";logEl.scrollTop=logEl.scrollHeight}
@@ -2703,12 +2860,15 @@ function resolvePendingCrazbySwap(triggerType){
 function triggerHellmoShieldEffect(p,type){
   if(S.head!=="HELLMO" || type!==S.orangeEffectShield || !S.orangeShieldEffect) return;
   const e=S.orangeShieldEffect;
-  if(e==="Panik") log(`⚠ HELLMO-Schild: ${N[p]} erhält 1 Panik.`);
-  else if(e==="Rückschlag"){
+  if(e==="Panik"){
+    log(`⚠ HELLMO-Schild: ${N[p]} erhält 1 Panik.`);
+    showHeroStatusFeedback(p,"Panik",1);
+  }else if(e==="Rückschlag"){
     heroDamage(p,2);
     log(`⚠ HELLMO-Schild: Rückschlag – ${N[p]} erhält 2 Schaden.`);
   }else{
     log(`⚠ HELLMO-Schild: ${N[p]} erhält 1 Lähmung.`);
+    showHeroStatusFeedback(p,"Lähmung",1);
   }
 }
 
@@ -2779,7 +2939,28 @@ function reduceIncoming(sourcePlayer,target,val){
    );
  }
 }
-function heroDamage(p,n){let el=document.getElementById(p+"hp");el.value=Math.max(0,+el.value-n)}
+
+function showHeroFeedback(p,text,type="damage"){
+  if(S.muteHeroFeedback)return;
+  const layer=document.getElementById("heroFeedbackLayer");
+  if(!layer)return;
+  const toast=document.createElement("div");
+  toast.className=`heroFeedbackToast ${type}`;
+  toast.textContent=`${N[p]}: ${text}`;
+  layer.appendChild(toast);
+  setTimeout(()=>toast.remove(),2350);
+}
+
+function showHeroStatusFeedback(p,status,count=1){
+  const label=count>1?`${count} ${status}`:`1 ${status}`;
+  showHeroFeedback(p,label,"status");
+}
+
+function heroDamage(p,n){
+  let el=document.getElementById(p+"hp");
+  el.value=Math.max(0,+el.value-n);
+  if(n>0)showHeroFeedback(p,`${n} Schaden`,"damage");
+}
 function addAction(p,n){for(let i=0;i<n;i++)S.bonusQueue.push(p);log(`➕ ${N[p]} erhält ${n} Bonusaktion${n>1?"en":""}.`)}
 function needsTarget(c){return c.effects.some(e=>["protect","protect_round","heal_target","draw_target","bonus_target","remove_status","remove_extra_effect"].includes(e[0]))}
 
@@ -3266,6 +3447,7 @@ if(window.bossReturnNextButton){
 }
 
 function bossReturn(){
+ S.muteHeroFeedback=true;
  S.bossReturnSteps=[];
  S.captureBossReturn=false;
  log("\n=== BOSS-RETURN ===");
@@ -3437,6 +3619,7 @@ function bossReturn(){
  // Die einzige Abschlussansage der neuen Heldenrunde.
  queueBossReturnStep("🃏","Zieht eure Karten!","Die neue Heldenrunde beginnt.");
 
+ S.muteHeroFeedback=false;
  startBossReturnSequence();
 }
 
