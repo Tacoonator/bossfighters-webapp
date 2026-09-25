@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – guided Boss Return
+   v1.11.6 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – physical-table play / curated Boss Return
+   v1.11.6 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – Frontkamera QR card scanner
+   v1.11.6 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – robust camera handling
+   v1.11.6 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – QR diagnostics
+   v1.11.6 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – scan light + tolerant real-card QR mapping
+   v1.11.6 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – tablet bossboard layout
+   v1.11.6 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – tablet HUD cleanup + hero feedback
+   v1.11.6 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – compact symbolic tablet heroes
+   v1.11.6 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – lower heroes, boss seals & battle intro
+   v1.11.6 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2607,7 +2607,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – lower heroes + prominent dismissible feedback
+   v1.11.6 – lower heroes + prominent dismissible feedback
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2687,7 +2687,7 @@ input{
 
 
 /* =========================================================
-   v1.11.5 – confirmable combat feedback between heroes
+   v1.11.6 – confirmable combat feedback between heroes
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2774,6 +2774,115 @@ input{
   }
 }
 
+
+/* =========================================================
+   v1.11.6 – centered confirmed combat feedback + log drawer
+   ========================================================= */
+@media(min-width:760px){
+  .tabletHudRail{
+    grid-template-columns:86px 100px 130px 64px 64px 64px !important;
+  }
+
+  #bossReturnModal{
+    align-items:flex-start !important;
+    justify-content:center !important;
+    padding-top:238px !important;
+    background:rgba(0,0,0,.16) !important;
+    z-index:105 !important;
+  }
+  #bossReturnModal .bossReturnModalBox{
+    width:min(360px,38vw) !important;
+    min-height:0 !important;
+    padding:17px 18px 15px !important;
+    border-radius:16px !important;
+    background:
+      radial-gradient(circle at 50% 0%,rgba(255,255,255,.05),transparent 34%),
+      linear-gradient(180deg,rgba(20,22,26,.98),rgba(7,9,11,.98)) !important;
+    box-shadow:0 18px 50px rgba(0,0,0,.58) !important;
+  }
+  #bossReturnModal .bossReturnStepLabel{
+    font-size:.62rem !important;
+    margin:0 !important;
+  }
+  #bossReturnModal .bossReturnStepIcon{
+    width:54px !important;
+    height:54px !important;
+    margin:8px auto 7px !important;
+    font-size:1.65rem !important;
+  }
+  #bossReturnStepTitle{
+    font-size:1.15rem !important;
+    margin:2px 0 6px !important;
+  }
+  #bossReturnModal .bossReturnStepText{
+    min-height:0 !important;
+    font-size:1.25rem !important;
+    font-weight:800;
+    line-height:1.25 !important;
+    padding:4px 0;
+  }
+  #bossReturnModal .bossReturnProgress{
+    margin:8px 0 0 !important;
+  }
+  #bossReturnNextButton{
+    min-height:44px !important;
+    margin-top:8px !important;
+  }
+
+  /* Tablet log as overlay drawer */
+  .logcol{
+    display:none !important;
+  }
+  .logcol.mobileOpen{
+    display:block !important;
+    position:fixed !important;
+    top:18px !important;
+    right:18px !important;
+    bottom:88px !important;
+    width:min(390px,42vw) !important;
+    height:auto !important;
+    z-index:130 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    border-radius:16px;
+    box-shadow:0 20px 65px rgba(0,0,0,.68);
+  }
+  .logcol.mobileOpen .panel{
+    height:100% !important;
+    padding:12px !important;
+    background:rgba(11,13,16,.98) !important;
+    border:1px solid #72695e !important;
+  }
+  .logcol.mobileOpen .log{
+    max-height:none !important;
+    height:100% !important;
+  }
+  .logHeaderActions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logCloseButton{
+    width:34px;
+    min-width:34px;
+    height:34px;
+    padding:0 !important;
+    display:grid;
+    place-items:center;
+  }
+}
+@media(min-width:760px) and (max-width:900px){
+  .tabletHudRail{
+    grid-template-columns:72px 86px 112px 58px 58px 58px !important;
+  }
+  #bossReturnModal{
+    padding-top:228px !important;
+  }
+  #bossReturnModal .bossReturnModalBox{
+    width:min(335px,40vw) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2856,6 +2965,7 @@ input{
           <b id="tabletHead">HELLMO</b>
         </div>
         <button id="tabletScanButton" class="primary tabletHudButton iconButton" type="button" title="QR-Karte scannen">▣</button>
+        <button id="tabletLogButton" class="tabletHudButton iconButton" type="button" title="Kampfprotokoll">≡</button>
         <button id="openEndGame" class="tabletHudDanger iconButton" type="button" title="Kampf beenden">✕</button>
       </div>
 
@@ -2984,7 +3094,10 @@ input{
 <section class="panel">
     <div class="logHeader">
       <h3>Kampfprotokoll</h3>
-      <span>nur Verlauf</span>
+      <div class="logHeaderActions">
+        <span>nur Verlauf</span>
+        <button id="tabletLogClose" type="button" class="logCloseButton">✕</button>
+      </div>
     </div>
     <div id="log" class="log"></div>
   </section>
@@ -3957,7 +4070,7 @@ function showBossReturnStep(){
   bossReturnStepText.textContent=step.text || "";
   bossReturnStepCount.textContent=`${S.bossReturnStepIndex+1} / ${S.bossReturnSteps.length}`;
   bossReturnNextButton.textContent=
-    S.bossReturnStepIndex===S.bossReturnSteps.length-1 ? "Heldenrunde starten" : "Weiter";
+    S.bossReturnStepIndex===S.bossReturnSteps.length-1 ? "Heldenrunde starten" : "Bestätigen";
   bossReturnModal.style.display="flex";
 }
 
@@ -3997,13 +4110,31 @@ function bossReturn(){
  const statusP2=S.incoming.p2.status;
 
  // Gewünschte Reihenfolge: Krieger, dann Assassine.
- let warriorText=`Krieger erhält ${rem.p2} Schaden.`;
- if(rem.p2>0 && statusP2) warriorText+=`\nNehmt zusätzlich ${statusP2}.`;
- queueBossReturnStep(rem.p2>0?"⚔":"🛡","Krieger",warriorText);
+ queueBossReturnStep(
+   rem.p2>0?"💥":"🛡",
+   "Krieger",
+   rem.p2>0?`${rem.p2} Schaden`:"Angriff vollständig abgewehrt"
+ );
+ if(rem.p2>0 && statusP2){
+   queueBossReturnStep(
+     statusP2==="Panik"?"⚠":"⛓",
+     "Krieger",
+     `Nehmt 1 ${statusP2}.`
+   );
+ }
 
- let assassinText=`Assassine erhält ${rem.p1} Schaden.`;
- if(rem.p1>0 && statusP1) assassinText+=`\nNehmt zusätzlich ${statusP1}.`;
- queueBossReturnStep(rem.p1>0?"🗡":"🛡","Assassine",assassinText);
+ queueBossReturnStep(
+   rem.p1>0?"💥":"🛡",
+   "Assassine",
+   rem.p1>0?`${rem.p1} Schaden`:"Angriff vollständig abgewehrt"
+ );
+ if(rem.p1>0 && statusP1){
+   queueBossReturnStep(
+     statusP1==="Panik"?"⚠":"⛓",
+     "Assassine",
+     `Nehmt 1 ${statusP1}.`
+   );
+ }
 
  // Normale Angriffe intern auflösen / vollständig loggen.
  resolveNormal("p1");
@@ -4891,6 +5022,24 @@ window.addEventListener("DOMContentLoaded",()=>{
   }
   if(window.introModal){
     introModal.style.display="flex";
+  }
+});
+
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const logColumn=document.querySelector(".logcol");
+  const tabletLogButton=document.getElementById("tabletLogButton");
+  const tabletLogClose=document.getElementById("tabletLogClose");
+
+  if(tabletLogButton && logColumn){
+    tabletLogButton.addEventListener("click",()=>{
+      logColumn.classList.toggle("mobileOpen");
+    });
+  }
+  if(tabletLogClose && logColumn){
+    tabletLogClose.addEventListener("click",()=>{
+      logColumn.classList.remove("mobileOpen");
+    });
   }
 });
 
