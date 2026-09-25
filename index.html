@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.10.4 – guided Boss Return
+   v1.10.5 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.10.4 – physical-table play / curated Boss Return
+   v1.10.5 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.10.4 – Frontkamera QR card scanner
+   v1.10.5 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.10.4 – robust camera handling
+   v1.10.5 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.10.4 – QR diagnostics
+   v1.10.5 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1891,6 +1891,32 @@ input{
   color:#e8e0d4;
   font-size:.78rem;
   line-height:1.35;
+}
+
+
+/* =========================================================
+   v1.10.5 – scan light + tolerant real-card QR mapping
+   ========================================================= */
+.scannerLightBar{
+  height:28px;
+  margin:0 0 8px;
+  background:#fff;
+  border:1px solid #fff;
+  box-shadow:
+    0 0 12px rgba(255,255,255,.95),
+    0 0 28px rgba(255,255,255,.7);
+}
+.scannerLightBar span{
+  display:block;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,#fff,#f8f8f8,#fff);
+}
+@media(max-width:700px){
+  .scannerLightBar{
+    height:34px;
+    margin-bottom:7px;
+  }
 }
 
 </style>
@@ -2065,6 +2091,10 @@ input{
         <h3 id="scannerTitle">Frontkamera</h3>
       </div>
       <button id="scannerClose" class="scannerClose" type="button">✕</button>
+    </div>
+
+    <div class="scannerLightBar" aria-hidden="true">
+      <span></span>
     </div>
 
     <div class="scannerView">
@@ -3297,12 +3327,26 @@ function activeCardPlayer(){
 }
 
 
+
+function canonicalRealQr(value){
+  return String(value||"")
+    .trim()
+    .replace(/\s+/g,"")
+    .replace(/-/g,"+")
+    .replace(/_/g,"/")
+    .replace(/=+$/,"");
+}
+
+const REAL_CARD_QR_CANONICAL = Object.fromEntries(
+  Object.entries(REAL_CARD_QR).map(([code,name])=>[canonicalRealQr(code),name])
+);
+
 function findCardByQr(raw){
   const p=activeCardPlayer();
   if(!p)return {error:"Während des Boss-Returns können keine Heldenkarten gespielt werden."};
 
   const rawValue=String(raw||"").trim();
-  const mappedName=REAL_CARD_QR[rawValue] || null;
+  const mappedName=REAL_CARD_QR[rawValue] || REAL_CARD_QR_CANONICAL[canonicalRealQr(rawValue)] || null;
 
   const current=[...DB[p],...DB.common];
 
