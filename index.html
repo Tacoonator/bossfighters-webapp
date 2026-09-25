@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.10.5 – guided Boss Return
+   v1.10.6 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.10.5 – physical-table play / curated Boss Return
+   v1.10.6 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.10.5 – Frontkamera QR card scanner
+   v1.10.6 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.10.5 – robust camera handling
+   v1.10.6 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.10.5 – QR diagnostics
+   v1.10.6 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.10.5 – scan light + tolerant real-card QR mapping
+   v1.10.6 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -2087,7 +2087,7 @@ input{
   <div class="scannerBox">
     <div class="scannerTop">
       <div>
-        <div class="scannerEyebrow">KARTE SCANNEN · 25 QR-CODES HINTERLEGT</div>
+        <div class="scannerEyebrow">KARTE SCANNEN · 65 QR-CODES HINTERLEGT</div>
         <h3 id="scannerTitle">Frontkamera</h3>
       </div>
       <button id="scannerClose" class="scannerClose" type="button">✕</button>
@@ -3267,6 +3267,16 @@ function initScannerUI(){
 }
 
 const REAL_CARD_QR = {
+  'LQAAAA==': 'Blinky',
+  'MwAAAA==': 'Kieselfreunde',
+  'MAAAAA==': 'Schmuckdolch',
+  'MQAAAA==': 'Pssst-Mäntelchen',
+  'LgAAAA==': 'Ahnenstein',
+  'LwAAAA==': 'Beulenmacher',
+  'NQAAAA==': 'Improvisieren',
+  'MgAAAA==': 'Glücksbrosche',
+  'NAAAAA==': 'Zauberzwille',
+  'NgAAAA==': 'Sausekraut',
   'GgAAAA==': 'Morgenstern',
   'GAAAAA==': 'Wampenschoner',
   'HQAAAA==': 'Titan-Armschienen',
@@ -3275,8 +3285,8 @@ const REAL_CARD_QR = {
   'FQAAAA==': 'Felsspalter',
   'HAAAAA==': 'Runenstein',
   'VQEAAA==': 'Anti-Boss-3000',
-  'GwAAAA=': 'Rune des Königs',
-  'HgAAAA=': 'Gardehelm',
+  'GwAAAA==': 'Rune des Königs',
+  'HgAAAA==': 'Gardehelm',
   'NwAAAA==': 'Schwert der Rubingarde',
   'OAAAAA==': 'Amulett des Bären',
   'OwAAAA==': 'Klingenblitz',
@@ -3287,11 +3297,41 @@ const REAL_CARD_QR = {
   'PQAAAA==': 'Ritterlicher Beistand',
   'PgAAAA==': 'Finte',
   'PwAAAA==': 'Schulterdornen',
+  'UwAAAA==': 'Hornissenstachel',
+  'TAAAAA==': 'Dornenfalle',
+  'TQAAAA==': 'Hand-Armbrust',
+  'SwAAAA==': 'Schattenklinge',
+  'TgAAAA==': 'Wurfmesser',
+  'UAAAAA==': 'Schattenrobe',
+  'TwAAAA==': 'Giftklinge',
+  'VAAAAA==': 'Fluch des Raben',
+  'UQAAAA==': 'Vipernzahn',
+  'AgEAAA==': 'Rauchbombe',
+  'mQAAAA==': 'Rucksack',
   'TQEAAA==': 'Heiltrank',
+  'BQEAAA==': 'Glücksbringer',
+  'BAEAAA==': 'Medizintasche',
+  'mAAAAA==': 'Trinkschlauch',
+  'CAEAAA==': 'Fluchbrecher',
   'GQEAAA==': 'Lebendige Stiefel',
+  'CwEAAA==': 'Klinge des Windes',
+  'BwEAAA==': 'Arkanes Monokel',
+  'CQEAAA==': 'Banner des Mutes',
+  'ZwEAAA==': 'Waffengift',
   'DgEAAA==': 'Anspornen',
+  'DQEAAA==': 'Schicksalsmünze',
+  'DwEAAA==': 'Himmelsrune',
+  'DAEAAA==': 'Wurfschild des Gladiators',
+  'FAEAAA==': 'Pyro-Falle',
   'CgEAAA==': 'Geweihte Schulterplatten',
-  'FQEAAA==': 'Magische Haut'
+  'EQEAAA==': 'Elixier der Sorglosigkeit',
+  'EgEAAA==': 'Todsicherer Pfeil',
+  'EwEAAA==': 'Feenkokon',
+  'GgEAAA==': 'Ornithopter',
+  'FQEAAA==': 'Magische Haut',
+  'FwEAAA==': 'Perfektes Zusammenspiel',
+  'FgEAAA==': 'Arkane Klinge',
+  'aAEAAA==': 'Pestbote'
 };
 
 function normalizeCardId(value){
