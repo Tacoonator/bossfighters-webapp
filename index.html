@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – guided Boss Return
+   v1.11.4 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – physical-table play / curated Boss Return
+   v1.11.4 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – Frontkamera QR card scanner
+   v1.11.4 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – robust camera handling
+   v1.11.4 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – QR diagnostics
+   v1.11.4 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – scan light + tolerant real-card QR mapping
+   v1.11.4 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – tablet bossboard layout
+   v1.11.4 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – tablet HUD cleanup + hero feedback
+   v1.11.4 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – compact symbolic tablet heroes
+   v1.11.4 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.3 – lower heroes, boss seals & battle intro
+   v1.11.4 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2603,6 +2603,86 @@ input{
   .shield.bossSeal{
     min-height:108px !important;
   }
+}
+
+
+/* =========================================================
+   v1.11.4 – lower heroes + prominent dismissible feedback
+   ========================================================= */
+@media(min-width:760px){
+  .tabletHeroMarker{
+    top:242px !important;
+  }
+}
+@media(min-width:760px) and (max-width:900px){
+  .tabletHeroMarker{
+    top:232px !important;
+  }
+}
+
+.heroFeedbackLayer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:95;
+}
+.heroFeedbackToast{
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  min-width:260px;
+  max-width:min(70vw,560px);
+  padding:14px 42px 14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:900;
+  font-size:1.1rem;
+  letter-spacing:.02em;
+  color:#fff;
+  background:rgba(8,10,13,.96);
+  border:1px solid rgba(235,224,208,.5);
+  border-radius:14px;
+  box-shadow:0 12px 34px rgba(0,0,0,.42);
+  pointer-events:auto;
+  animation:heroFeedbackAppear .18s ease-out;
+}
+.heroFeedbackToast.damage{
+  border-color:#ba5f5f;
+  box-shadow:0 12px 34px rgba(0,0,0,.42),0 0 18px rgba(186,95,95,.12);
+}
+.heroFeedbackToast.status{
+  border-color:#d0ad58;
+  box-shadow:0 12px 34px rgba(0,0,0,.42),0 0 18px rgba(208,173,88,.12);
+}
+.heroFeedbackToast.heal{
+  border-color:#6ca477;
+}
+.heroFeedbackToast .feedbackClose{
+  position:absolute;
+  right:9px;
+  top:8px;
+  width:28px;
+  height:28px;
+  min-width:28px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#171a1e;
+  border:1px solid #5d626a;
+  color:#ddd;
+  font-size:.9rem;
+  line-height:1;
+}
+.heroFeedbackToast .feedbackClose:hover{
+  background:#24282e;
+}
+@keyframes heroFeedbackAppear{
+  from{opacity:0;transform:translate(-50%,-8px) scale(.98)}
+  to{opacity:1;transform:translate(-50%,0) scale(1)}
 }
 
 </style>
@@ -3261,11 +3341,32 @@ function showHeroFeedback(p,text,type="damage"){
   if(S.muteHeroFeedback)return;
   const layer=document.getElementById("heroFeedbackLayer");
   if(!layer)return;
+
   const toast=document.createElement("div");
   toast.className=`heroFeedbackToast ${type}`;
-  toast.textContent=`${N[p]}: ${text}`;
+
+  const message=document.createElement("span");
+  message.textContent=`${N[p]}: ${text}`;
+
+  const close=document.createElement("button");
+  close.type="button";
+  close.className="feedbackClose";
+  close.setAttribute("aria-label","Meldung schließen");
+  close.textContent="✕";
+
+  const removeToast=()=>{
+    if(toast.parentNode)toast.remove();
+  };
+
+  close.addEventListener("click",removeToast);
+  toast.appendChild(message);
+  toast.appendChild(close);
+
+  // Keep only one current combat notification visible.
+  layer.querySelectorAll(".heroFeedbackToast").forEach(el=>el.remove());
   layer.appendChild(toast);
-  setTimeout(()=>toast.remove(),2350);
+
+  setTimeout(removeToast,5200);
 }
 
 function showHeroStatusFeedback(p,status,count=1){
