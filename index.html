@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – guided Boss Return
+   v1.11.3 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – physical-table play / curated Boss Return
+   v1.11.3 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – Frontkamera QR card scanner
+   v1.11.3 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – robust camera handling
+   v1.11.3 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – QR diagnostics
+   v1.11.3 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – scan light + tolerant real-card QR mapping
+   v1.11.3 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – tablet bossboard layout
+   v1.11.3 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – tablet HUD cleanup + hero feedback
+   v1.11.3 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.2 – compact symbolic tablet heroes
+   v1.11.3 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2414,6 +2414,194 @@ input{
   }
   .tabletHudRail{
     grid-template-columns:72px 86px 112px 58px 58px !important;
+  }
+}
+
+
+/* =========================================================
+   v1.11.3 – lower heroes, boss seals & battle intro
+   ========================================================= */
+.introModal{
+  z-index:150 !important;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(164,52,35,.18),transparent 34%),
+    rgba(0,0,0,.94) !important;
+}
+.introModalBox{
+  width:min(90vw,560px);
+  min-height:430px;
+  padding:34px 30px 30px !important;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(171,91,40,.12),transparent 38%),
+    linear-gradient(180deg,#191b1e,#090a0c) !important;
+  border:2px solid #877a68 !important;
+  box-shadow:0 26px 80px rgba(0,0,0,.72);
+}
+.introCrest{
+  width:72px;
+  height:72px;
+  display:grid;
+  place-items:center;
+  margin-bottom:13px;
+  border:1px solid #8d7d66;
+  border-radius:50%;
+  background:#090a0c;
+  font-size:2rem;
+  box-shadow:0 0 30px rgba(178,111,51,.12);
+}
+.introEyebrow{
+  font-size:.7rem;
+  letter-spacing:.26em;
+  color:#b9aa93;
+  margin-bottom:6px;
+}
+.introModalBox h2{
+  margin:0 0 16px;
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  letter-spacing:.08em;
+  font-size:2.25rem;
+}
+.introLead{
+  margin:0 0 9px;
+  font-size:1.15rem;
+  font-weight:800;
+  color:#e9ddca;
+}
+.introText{
+  max-width:430px;
+  margin:0;
+  line-height:1.55;
+  color:#bfb7aa;
+}
+.introStartButton{
+  width:min(100%,310px);
+  min-height:56px;
+  margin-top:24px;
+  font-size:1.05rem;
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  letter-spacing:.06em;
+}
+
+@media(min-width:760px){
+  /* Heroes sit lower, closer to the actual play area */
+  .tabletHeroMarker{
+    top:190px !important;
+    width:min(180px,20vw) !important;
+  }
+
+  /* Three floating boss seals instead of a rectangular shield panel */
+  .shields{
+    left:50% !important;
+    bottom:116px !important;
+    width:min(500px,54vw) !important;
+    padding:0 !important;
+    gap:18px !important;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+  }
+  .shield.bossSeal{
+    position:relative;
+    min-height:118px !important;
+    padding:12px 8px 10px !important;
+    border-radius:50% 50% 44% 44% / 46% 46% 54% 54% !important;
+    border:2px solid rgba(210,196,170,.62) !important;
+    background:
+      radial-gradient(circle at 50% 24%,rgba(255,255,255,.07),transparent 28%),
+      radial-gradient(circle at 50% 50%,#24272c 0%,#111317 62%,#07080a 100%) !important;
+    box-shadow:
+      inset 0 0 0 4px rgba(0,0,0,.34),
+      inset 0 -14px 22px rgba(0,0,0,.5),
+      0 9px 24px rgba(0,0,0,.38) !important;
+    overflow:visible !important;
+  }
+  .shield.bossSeal::before{
+    content:"";
+    position:absolute;
+    inset:7px;
+    border:1px solid rgba(225,211,185,.18);
+    border-radius:inherit;
+    pointer-events:none;
+  }
+  .shield.bossSeal b{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    font-size:.8rem !important;
+    color:#cfc3af;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .shieldSymbol{
+    font-size:1.15rem;
+    color:#e7d5aa;
+    line-height:1;
+  }
+  .shieldName{
+    opacity:.85;
+  }
+  .shield.bossSeal > div[id="sm"],
+  .shield.bossSeal > div[id="sr"],
+  .shield.bossSeal > div[id="sg"]{
+    margin-top:4px;
+    font-size:2.45rem !important;
+    font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+    color:#f2eadf;
+    text-shadow:0 2px 0 #000;
+  }
+  .shield.bossSeal .small{
+    position:absolute;
+    left:50%;
+    bottom:-13px;
+    transform:translateX(-50%);
+    min-width:max-content;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:5px 9px !important;
+    border-radius:999px !important;
+    background:#1a1c20 !important;
+    border:1px solid #786b58;
+    color:#ead4a6 !important;
+    font-size:.72rem !important;
+    line-height:1 !important;
+    box-shadow:0 5px 14px rgba(0,0,0,.42);
+  }
+  .shield.bossSeal .small:empty{
+    display:none !important;
+  }
+  .shield.bossSeal.effect{
+    border-color:#d6a24f !important;
+    box-shadow:
+      inset 0 0 0 4px rgba(0,0,0,.34),
+      inset 0 -14px 22px rgba(0,0,0,.5),
+      0 0 0 2px rgba(214,162,79,.15),
+      0 0 22px rgba(214,162,79,.24) !important;
+  }
+  .shield.bossSeal.effect .small{
+    background:#6a351d !important;
+    border-color:#d6a24f !important;
+    color:#fff0c4 !important;
+  }
+}
+
+@media(min-width:760px) and (max-width:900px){
+  .tabletHeroMarker{
+    top:180px !important;
+    width:min(165px,21vw) !important;
+  }
+  .shields{
+    width:min(455px,57vw) !important;
+    gap:12px !important;
+  }
+  .shield.bossSeal{
+    min-height:108px !important;
   }
 }
 
@@ -2521,9 +2709,18 @@ input{
       </div>
 
       <div class="shields">
-        <div id="shieldMeleeBox" class="shield"><b>Nah</b><div id="sm">3</div><div id="sem" class="small muted"></div></div>
-        <div id="shieldRangedBox" class="shield"><b>Fern</b><div id="sr">4</div><div id="ser" class="small muted"></div></div>
-        <div id="shieldMagicBox" class="shield"><b>Magie</b><div id="sg">4</div><div id="seg" class="small muted"></div></div>
+        <div id="shieldMeleeBox" class="shield bossSeal">
+          <b><span class="shieldSymbol">⚔</span><span class="shieldName">Nah</span></b>
+          <div id="sm">3</div><div id="sem" class="small muted"></div>
+        </div>
+        <div id="shieldRangedBox" class="shield bossSeal">
+          <b><span class="shieldSymbol">➶</span><span class="shieldName">Fern</span></b>
+          <div id="sr">4</div><div id="ser" class="small muted"></div>
+        </div>
+        <div id="shieldMagicBox" class="shield bossSeal">
+          <b><span class="shieldSymbol">✦</span><span class="shieldName">Magie</span></b>
+          <div id="sg">4</div><div id="seg" class="small muted"></div>
+        </div>
       </div>
     </section>
 
@@ -2629,11 +2826,27 @@ input{
 
 
 
-<div id="starterModal" class="modal" style="display:flex">
+
+<div id="introModal" class="modal introModal" style="display:flex">
+  <div class="modalbox introModalBox">
+    <div class="introCrest">☠</div>
+    <div class="introEyebrow">BOSSFIGHT</div>
+    <h2>HELLMO &amp; Crazby</h2>
+    <p class="introLead">Etwas kratzt hinter der Tür.</p>
+    <p class="introText">
+      Zwei Augenpaare beobachten euch aus der Dunkelheit.<br>
+      Einer wirkt nervös. Der andere viel zu ruhig.<br><br>
+      <b>Bereit?</b> Dann legt eure Karten bereit.
+    </p>
+    <button id="introStartButton" class="primary introStartButton" type="button" onclick="beginBattleIntro()">Kampf beginnen</button>
+  </div>
+</div>
+
+<div id="starterModal" class="modal" style="display:none">
   <div class="modalbox starterModalBox">
-    <div class="starterEyebrow">HELDENRUNDE</div>
-    <h3>Wer beginnt?</h3>
-    <p class="muted">Wählt, welcher Held die erste Aktion dieser Runde ausführt.</p>
+    <div class="starterEyebrow">DIE ERSTE AKTION</div>
+    <h3>Wer tritt zuerst vor?</h3>
+    <p class="muted">Wählt den Helden, der den Kampf eröffnet.</p>
     <div class="starterButtons">
       <button class="primary" type="button" onclick="chooseStarter('p1')">Assassine beginnt</button>
       <button type="button" onclick="chooseStarter('p2')">Krieger beginnt</button>
@@ -3834,6 +4047,12 @@ function heroActionsLeft(p){
   return S.queue.filter(x=>x===p).length;
 }
 
+
+function beginBattleIntro(){
+  if(window.introModal) introModal.style.display="none";
+  if(window.starterModal) starterModal.style.display="flex";
+}
+
 function chooseStarter(p){
   S.start=p;
   if(window.startPlayer) startPlayer.value=p;
@@ -4450,8 +4669,8 @@ window.addEventListener("DOMContentLoaded",()=>{
   if(endBtn){
     endBtn.addEventListener("click",openEndGameModal);
   }
-  if(window.starterModal){
-    starterModal.style.display="flex";
+  if(window.introModal){
+    introModal.style.display="flex";
   }
 });
 
