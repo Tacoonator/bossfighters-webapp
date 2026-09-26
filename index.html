@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – guided Boss Return
+   v1.11.11 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – physical-table play / curated Boss Return
+   v1.11.11 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – Frontkamera QR card scanner
+   v1.11.11 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – robust camera handling
+   v1.11.11 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – QR diagnostics
+   v1.11.11 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – scan light + tolerant real-card QR mapping
+   v1.11.11 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – tablet bossboard layout
+   v1.11.11 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – tablet HUD cleanup + hero feedback
+   v1.11.11 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – compact symbolic tablet heroes
+   v1.11.11 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – lower heroes, boss seals & battle intro
+   v1.11.11 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2607,7 +2607,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – lower heroes + prominent dismissible feedback
+   v1.11.11 – lower heroes + prominent dismissible feedback
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2687,7 +2687,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – confirmable combat feedback between heroes
+   v1.11.11 – confirmable combat feedback between heroes
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2776,7 +2776,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – centered confirmed combat feedback + log drawer
+   v1.11.11 – centered confirmed combat feedback + log drawer
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -2885,7 +2885,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – dedicated HELLMO shield reaction popup
+   v1.11.11 – dedicated HELLMO shield reaction popup
    ========================================================= */
 .shieldReactionModal{
   z-index:145 !important;
@@ -2955,7 +2955,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – victory / birthday popup
+   v1.11.11 – victory / birthday popup
    ========================================================= */
 .victoryModalBox{
   width:min(92vw,540px);
@@ -3031,7 +3031,7 @@ input{
 
 
 /* =========================================================
-   v1.11.10 – prominent boss HP + full-strength warning
+   v1.11.11 – prominent boss HP + full-strength warning
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -3136,6 +3136,193 @@ input{
   }
 }
 
+
+/* =========================================================
+   v1.11.11 – symmetric boss HUD + centered large HP
+   ========================================================= */
+@media(min-width:760px){
+  /* Old HUD rail is no longer used */
+  .tabletHudRail{
+    display:none !important;
+  }
+
+  .tabletBossInfo{
+    position:absolute;
+    left:50%;
+    bottom:92px;
+    transform:translateX(-50%);
+    width:min(680px,72vw);
+    display:grid;
+    grid-template-columns:1fr 1.45fr 1fr;
+    align-items:center;
+    gap:18px;
+    z-index:34;
+    pointer-events:none;
+  }
+
+  .tabletBossSide,
+  .tabletBossHpCenter{
+    pointer-events:auto;
+    min-height:74px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(180deg,rgba(12,14,17,.95),rgba(7,8,10,.94));
+    border:1px solid rgba(226,214,193,.34);
+    box-shadow:0 10px 26px rgba(0,0,0,.34);
+    backdrop-filter:blur(4px);
+  }
+
+  .tabletBossSide{
+    gap:9px;
+    padding:10px 16px;
+  }
+  .tabletBossSideLeft{
+    border-radius:18px 8px 8px 18px;
+  }
+  .tabletBossSideRight{
+    border-radius:8px 18px 18px 8px;
+  }
+  .tabletBossSideIcon{
+    font-size:1.15rem;
+    color:#c7b99e;
+  }
+  .tabletBossSide b{
+    font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+    font-size:1.25rem;
+    letter-spacing:.07em;
+  }
+
+  .tabletBossHpCenter{
+    position:relative;
+    min-height:96px;
+    flex-direction:column;
+    gap:0;
+    border:2px solid #9b6d54;
+    border-radius:22px;
+    background:
+      radial-gradient(circle at 50% 18%,rgba(180,51,39,.2),transparent 46%),
+      linear-gradient(180deg,rgba(23,19,19,.98),rgba(8,9,11,.97));
+    box-shadow:0 12px 34px rgba(0,0,0,.42),0 0 22px rgba(165,62,49,.12);
+  }
+  .tabletBossHpIcon{
+    position:absolute;
+    left:18px;
+    top:16px;
+    font-size:1.3rem;
+    color:#dc6159;
+  }
+  .tabletBossHpCenter b{
+    font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+    font-size:3.9rem;
+    line-height:.9;
+    color:#fff2eb;
+    text-shadow:0 3px 0 #000;
+  }
+  .tabletBossHpCenter small{
+    margin-top:5px;
+    font-size:.66rem;
+    letter-spacing:.22em;
+    color:#a69a8d;
+  }
+
+  .tabletRoundChip.powered{
+    border-color:#b94e4e !important;
+    background:
+      radial-gradient(circle at 50% 18%,rgba(178,45,45,.25),transparent 50%),
+      linear-gradient(180deg,rgba(36,12,14,.96),rgba(13,8,9,.95)) !important;
+    box-shadow:0 0 18px rgba(187,57,57,.24);
+  }
+  .tabletRoundChip.powered .tabletBossSideIcon,
+  .tabletRoundChip.powered b{
+    color:#ff6b65 !important;
+  }
+
+  .tabletBottomControls{
+    position:absolute;
+    left:50%;
+    bottom:16px;
+    transform:translateX(-50%);
+    width:min(520px,56vw);
+    display:grid;
+    grid-template-columns:72px 1fr 72px;
+    gap:14px;
+    align-items:end;
+    z-index:36;
+  }
+
+  .tabletEdgeButton,
+  .tabletScanMain{
+    display:grid;
+    place-items:center;
+    border-radius:16px;
+    box-shadow:0 8px 22px rgba(0,0,0,.34);
+  }
+
+  .tabletEdgeButton{
+    min-height:56px;
+    font-size:1.45rem;
+    padding:0;
+    background:rgba(14,16,19,.96);
+    border:1px solid #6b645b;
+  }
+
+  .tabletEndButton{
+    background:#321114 !important;
+    border-color:#77353a !important;
+    color:#e7c7c7 !important;
+  }
+
+  .tabletScanMain{
+    min-height:72px;
+    font-size:2rem;
+    padding:0;
+    border:2px solid #b89a55 !important;
+    background:
+      radial-gradient(circle at 50% 24%,rgba(255,255,255,.08),transparent 38%),
+      linear-gradient(180deg,#8f6f2f,#5e461c) !important;
+  }
+  .qrGlyph{
+    font-size:2.15rem;
+    line-height:1;
+    transform:rotate(45deg);
+    display:inline-block;
+  }
+
+  /* Shift shields a little upward to leave clean space for the new HUD */
+  .shields{
+    bottom:214px !important;
+  }
+}
+
+@media(min-width:760px) and (max-width:900px){
+  .tabletBossInfo{
+    width:min(620px,76vw);
+    bottom:88px;
+    gap:12px;
+  }
+  .tabletBossHpCenter b{
+    font-size:3.4rem;
+  }
+  .tabletBossSide b{
+    font-size:1.05rem;
+  }
+  .tabletBottomControls{
+    width:min(470px,60vw);
+    grid-template-columns:64px 1fr 64px;
+    gap:12px;
+  }
+  .tabletEdgeButton{
+    min-height:52px;
+  }
+  .tabletScanMain{
+    min-height:68px;
+  }
+  .shields{
+    bottom:205px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3204,23 +3391,30 @@ input{
         </div>
       </div>
 
-      <div class="tabletHudRail">
-        <div id="tabletRoundChip" class="tabletHudChip tabletRoundChip" title="Runde">
-          <span class="tabletHudIcon">↻</span>
-          <b id="tabletRound">1</b>
+      <div class="tabletBossInfo">
+        <div class="tabletBossSide tabletBossSideLeft" title="Aktiver Bosskopf">
+          <span class="tabletBossSideIcon">◉</span>
+          <b id="tabletHead">HELLMO</b>
         </div>
-        <div id="tabletHpChip" class="tabletHudChip tabletHpChip" title="Boss-Lebenspunkte">
-          <span class="tabletHudIcon">♥</span>
+
+        <div id="tabletHpChip" class="tabletBossHpCenter" title="Boss-Lebenspunkte">
+          <span class="tabletBossHpIcon">♥</span>
           <b id="tabletBossHp">90</b>
           <small>LP</small>
         </div>
-        <div class="tabletHudChip" title="Aktiver Bosskopf">
-          <span class="tabletHudIcon">◉</span>
-          <b id="tabletHead">HELLMO</b>
+
+        <div id="tabletRoundChip" class="tabletBossSide tabletBossSideRight tabletRoundChip" title="Runde">
+          <span class="tabletBossSideIcon">↻</span>
+          <b id="tabletRound">1</b>
         </div>
-        <button id="tabletScanButton" class="primary tabletHudButton iconButton" type="button" title="QR-Karte scannen">▣</button>
-        <button id="tabletLogButton" class="tabletHudButton iconButton" type="button" title="Kampfprotokoll">≡</button>
-        <button id="openEndGame" class="tabletHudDanger iconButton" type="button" title="Kampf beenden">✕</button>
+      </div>
+
+      <div class="tabletBottomControls">
+        <button id="tabletLogButton" class="tabletEdgeButton" type="button" title="Kampfprotokoll">📖</button>
+        <button id="tabletScanButton" class="primary tabletScanMain" type="button" title="QR-Karte scannen">
+          <span class="qrGlyph">⌗</span>
+        </button>
+        <button id="openEndGame" class="tabletEdgeButton tabletEndButton" type="button" title="Kampf beenden">☠</button>
       </div>
 
       <div class="attacks">
