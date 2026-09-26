@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – guided Boss Return
+   v1.11.13 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – physical-table play / curated Boss Return
+   v1.11.13 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – Frontkamera QR card scanner
+   v1.11.13 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – robust camera handling
+   v1.11.13 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – QR diagnostics
+   v1.11.13 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – scan light + tolerant real-card QR mapping
+   v1.11.13 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – tablet bossboard layout
+   v1.11.13 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – tablet HUD cleanup + hero feedback
+   v1.11.13 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – compact symbolic tablet heroes
+   v1.11.13 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – lower heroes, boss seals & battle intro
+   v1.11.13 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2607,7 +2607,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – lower heroes + prominent dismissible feedback
+   v1.11.13 – lower heroes + prominent dismissible feedback
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2687,7 +2687,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – confirmable combat feedback between heroes
+   v1.11.13 – confirmable combat feedback between heroes
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2776,7 +2776,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – centered confirmed combat feedback + log drawer
+   v1.11.13 – centered confirmed combat feedback + log drawer
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -2885,7 +2885,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – dedicated HELLMO shield reaction popup
+   v1.11.13 – dedicated HELLMO shield reaction popup
    ========================================================= */
 .shieldReactionModal{
   z-index:145 !important;
@@ -2955,7 +2955,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – victory / birthday popup
+   v1.11.13 – victory / birthday popup
    ========================================================= */
 .victoryModalBox{
   width:min(92vw,540px);
@@ -3031,7 +3031,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – prominent boss HP + full-strength warning
+   v1.11.13 – prominent boss HP + full-strength warning
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -3138,7 +3138,7 @@ input{
 
 
 /* =========================================================
-   v1.11.11 – symmetric boss HUD + centered large HP
+   v1.11.13 – symmetric boss HUD + centered large HP
    ========================================================= */
 @media(min-width:760px){
   /* Old HUD rail is no longer used */
@@ -3323,6 +3323,79 @@ input{
   }
 }
 
+
+/* =========================================================
+   v1.11.13 – start-player selection directly on the board
+   ========================================================= */
+.starterBoardHint{
+  display:none;
+}
+body.choosingStarter .starterBoardHint{
+  display:flex;
+}
+.starterBoardHint{
+  position:absolute;
+  left:50%;
+  top:150px;
+  transform:translateX(-50%);
+  z-index:48;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  padding:9px 16px 8px;
+  border-radius:999px;
+  background:rgba(8,10,12,.84);
+  border:1px solid rgba(226,214,193,.32);
+  box-shadow:0 8px 22px rgba(0,0,0,.3);
+  backdrop-filter:blur(3px);
+  pointer-events:none;
+}
+.starterBoardHint span{
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  font-size:1.05rem;
+  letter-spacing:.06em;
+}
+.starterBoardHint small{
+  font-size:.7rem;
+  color:#bdb3a6;
+}
+
+body.choosingStarter .tabletHeroMarker{
+  cursor:pointer;
+  pointer-events:auto;
+  border-color:#b99655 !important;
+  box-shadow:
+    0 0 0 1px rgba(216,183,99,.22),
+    0 0 20px rgba(216,183,99,.16),
+    0 10px 30px rgba(0,0,0,.35) !important;
+  animation:starterHeroPulse 1.8s ease-in-out infinite alternate;
+}
+body.choosingStarter .tabletHeroMarker:hover,
+body.choosingStarter .tabletHeroMarker:focus{
+  border-color:#e0bd68 !important;
+  box-shadow:
+    0 0 0 2px rgba(224,189,104,.24),
+    0 0 28px rgba(224,189,104,.22),
+    0 12px 34px rgba(0,0,0,.4) !important;
+  outline:none;
+}
+body.choosingStarter .tabletHeroMarker .tabletHeroName::after{
+  content:"  ▶";
+  color:#e0bd68;
+  font-size:.78em;
+}
+@keyframes starterHeroPulse{
+  from{transform:translateY(0)}
+  to{transform:translateY(-2px)}
+}
+
+/* While selecting the starter, gameplay actions stay inactive. */
+body.choosingStarter .tabletBottomControls,
+body.choosingStarter .cardsPanel{
+  opacity:.45;
+  pointer-events:none;
+}
+
 </style>
 </head>
 <body>
@@ -3363,8 +3436,14 @@ input{
 
       <div id="heroFeedbackLayer" class="heroFeedbackLayer" aria-live="polite"></div>
 
+      <div id="starterBoardHint" class="starterBoardHint">
+        <span>Wer beginnt?</span>
+        <small>Wählt einen Helden.</small>
+      </div>
+
+
       <div class="tabletHeroLayer" aria-hidden="false">
-        <div id="tabletHeroP1" class="tabletHeroMarker left">
+        <div id="tabletHeroP1" class="tabletHeroMarker left" role="button" tabindex="0" aria-label="Assassine beginnt">
           <div class="tabletHeroTop">
             <span class="tabletHeroName">Assassine</span>
             <span class="tabletHeroActionDots" id="tabletP1ActionDots" aria-label="Aktionen"></span>
@@ -3377,7 +3456,7 @@ input{
           <span id="tabletP1Actions" hidden>3</span>
         </div>
 
-        <div id="tabletHeroP2" class="tabletHeroMarker right">
+        <div id="tabletHeroP2" class="tabletHeroMarker right" role="button" tabindex="0" aria-label="Krieger beginnt">
           <div class="tabletHeroTop">
             <span class="tabletHeroName">Krieger</span>
             <span class="tabletHeroActionDots" id="tabletP2ActionDots" aria-label="Aktionen"></span>
@@ -3572,7 +3651,7 @@ input{
   </div>
 </div>
 
-<div id="starterModal" class="modal" style="display:none">
+<div id="starterModal" class="modal" style="display:none" aria-hidden="true">
   <div class="modalbox starterModalBox">
     <div class="starterEyebrow">DIE ERSTE AKTION</div>
     <h3>Wer tritt zuerst vor?</h3>
@@ -4933,12 +5012,65 @@ function heroActionsLeft(p){
 }
 
 
-function beginBattleIntro(){
+
+let screenWakeLock=null;
+
+async function requestScreenWakeLock(){
+  if(!("wakeLock" in navigator))return false;
+
+  try{
+    if(screenWakeLock && !screenWakeLock.released)return true;
+
+    screenWakeLock=await navigator.wakeLock.request("screen");
+
+    screenWakeLock.addEventListener("release",()=>{
+      screenWakeLock=null;
+    });
+
+    log("☀ Displaysperre deaktiviert.");
+    return true;
+  }catch(err){
+    console.warn("Screen Wake Lock konnte nicht aktiviert werden:",err);
+    return false;
+  }
+}
+
+document.addEventListener("visibilitychange",async()=>{
+  if(document.visibilityState==="visible"){
+    await requestScreenWakeLock();
+  }
+});
+
+// Einige Browser erlauben Wake Lock erst nach einer Nutzeraktion.
+// Der erste Tap/Klick versucht ihn daher ebenfalls zu aktivieren.
+window.addEventListener("pointerdown",()=>{
+  requestScreenWakeLock();
+},{once:true});
+
+async function beginBattleIntro(){
+  await requestScreenWakeLock();
   if(window.introModal) introModal.style.display="none";
-  if(window.starterModal) starterModal.style.display="flex";
+  enterStarterSelection();
+}
+
+
+function enterStarterSelection(){
+  document.body.classList.add("choosingStarter");
+  if(window.starterBoardHint) starterBoardHint.style.display="";
+}
+
+function leaveStarterSelection(){
+  document.body.classList.remove("choosingStarter");
+  if(window.starterBoardHint) starterBoardHint.style.display="none";
+}
+
+function handleStarterHeroClick(p){
+  if(!document.body.classList.contains("choosingStarter"))return;
+  chooseStarter(p);
 }
 
 function chooseStarter(p){
+  leaveStarterSelection();
   S.heroFeedbackQueue=[];
   S.heroFeedbackOpen=false;
   const feedbackLayer=document.getElementById("heroFeedbackLayer");
@@ -5627,6 +5759,26 @@ window.addEventListener("DOMContentLoaded",()=>{
   if(powerUpConfirm){
     powerUpConfirm.addEventListener("click",closePowerUpNotice);
   }
+});
+
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const p1=document.getElementById("tabletHeroP1");
+  const p2=document.getElementById("tabletHeroP2");
+
+  const bindStarter=(el,p)=>{
+    if(!el)return;
+    el.addEventListener("click",()=>handleStarterHeroClick(p));
+    el.addEventListener("keydown",(e)=>{
+      if(e.key==="Enter" || e.key===" "){
+        e.preventDefault();
+        handleStarterHeroClick(p);
+      }
+    });
+  };
+
+  bindStarter(p1,"p1");
+  bindStarter(p2,"p2");
 });
 
 </script>
