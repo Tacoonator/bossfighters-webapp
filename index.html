@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – guided Boss Return
+   v1.11.8 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – physical-table play / curated Boss Return
+   v1.11.8 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – Frontkamera QR card scanner
+   v1.11.8 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – robust camera handling
+   v1.11.8 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – QR diagnostics
+   v1.11.8 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – scan light + tolerant real-card QR mapping
+   v1.11.8 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – tablet bossboard layout
+   v1.11.8 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – tablet HUD cleanup + hero feedback
+   v1.11.8 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – compact symbolic tablet heroes
+   v1.11.8 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – lower heroes, boss seals & battle intro
+   v1.11.8 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2607,7 +2607,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – lower heroes + prominent dismissible feedback
+   v1.11.8 – lower heroes + prominent dismissible feedback
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2687,7 +2687,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – confirmable combat feedback between heroes
+   v1.11.8 – confirmable combat feedback between heroes
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2776,7 +2776,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – centered confirmed combat feedback + log drawer
+   v1.11.8 – centered confirmed combat feedback + log drawer
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -2885,7 +2885,7 @@ input{
 
 
 /* =========================================================
-   v1.11.7 – dedicated HELLMO shield reaction popup
+   v1.11.8 – dedicated HELLMO shield reaction popup
    ========================================================= */
 .shieldReactionModal{
   z-index:145 !important;
@@ -2951,6 +2951,82 @@ input{
   .shieldReactionBox{
     width:min(90vw,390px);
   }
+}
+
+
+/* =========================================================
+   v1.11.8 – victory / birthday popup
+   ========================================================= */
+.victoryModalBox{
+  width:min(92vw,540px);
+  min-height:420px;
+  padding:28px 26px 24px !important;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(212,165,72,.16),transparent 38%),
+    linear-gradient(180deg,#191b1f,#080a0c) !important;
+  border:2px solid #8e7d64 !important;
+  box-shadow:0 26px 80px rgba(0,0,0,.72);
+}
+.victoryIcon{
+  width:72px;
+  height:72px;
+  display:grid;
+  place-items:center;
+  margin:10px auto 12px;
+  border-radius:50%;
+  border:1px solid #a58d65;
+  background:#090b0d;
+  font-size:2rem;
+  color:#f0cf78;
+  box-shadow:0 0 30px rgba(211,164,72,.14);
+}
+.victoryModalBox h3{
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  font-size:2rem !important;
+  letter-spacing:.06em;
+  margin:0 0 10px !important;
+}
+.victoryText{
+  max-width:430px;
+  margin:0 auto;
+  color:#c8c0b5;
+  line-height:1.5;
+  white-space:pre-line;
+}
+.birthdayPrize{
+  margin:22px auto 6px;
+  padding:18px 16px;
+  max-width:390px;
+  border:1px solid rgba(225,201,145,.45);
+  border-radius:16px;
+  background:linear-gradient(180deg,rgba(92,65,24,.28),rgba(20,17,12,.55));
+}
+.birthdayLine{
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  font-size:1.45rem;
+  letter-spacing:.04em;
+  color:#f2d995;
+}
+.birthdaySub{
+  margin-top:5px;
+  font-size:.9rem;
+  color:#c8bfae;
+}
+.prizeCodeLabel{
+  margin-top:18px;
+  font-size:.65rem;
+  letter-spacing:.22em;
+  color:#a99a84;
+}
+.prizeCode{
+  margin-top:3px;
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  font-size:3.4rem;
+  line-height:1;
+  letter-spacing:.14em;
+  color:#fff4cd;
+  text-shadow:0 0 18px rgba(242,217,149,.16);
 }
 
 </style>
@@ -3220,10 +3296,19 @@ input{
 </div>
 
 <div id="gameOverModal" class="modal" style="display:none">
-  <div class="modalbox starterModalBox">
-    <div class="starterEyebrow">KAMPF BEENDET</div>
+  <div class="modalbox victoryModalBox">
+    <div id="gameOverEyebrow" class="starterEyebrow">KAMPF BEENDET</div>
+    <div id="gameOverIcon" class="victoryIcon">★</div>
     <h3 id="gameOverTitle">Kampf beendet</h3>
-    <p id="gameOverText" class="muted">Der Kampf ist vorbei.</p>
+    <p id="gameOverText" class="victoryText">Der Kampf ist vorbei.</p>
+
+    <div id="birthdayPrize" class="birthdayPrize" style="display:none">
+      <div class="birthdayLine">Alles Gute zum Geburtstag!</div>
+      <div class="birthdaySub">Ihr habt euch euren Preis verdient.</div>
+      <div class="prizeCodeLabel">DEIN CODE</div>
+      <div class="prizeCode">291</div>
+    </div>
+
     <div class="starterButtons">
       <button class="primary" type="button" onclick="location.reload()">Neuen Kampf starten</button>
     </div>
@@ -4542,11 +4627,30 @@ function closeEndGameModal(){
 }
 function finishGame(reason){
   closeEndGameModal();
-  if(window.gameOverTitle) gameOverTitle.textContent=reason;
-  if(window.gameOverText) gameOverText.textContent=reason==="Boss besiegt"
-    ? "HELLMO & Crazby wurden besiegt."
-    : "Ein Held ist gefallen. Der Kampf ist beendet.";
-  if(window.gameOverModal) gameOverModal.style.display="flex";
+
+  const win=reason==="Boss besiegt";
+
+  if(window.gameOverEyebrow){
+    gameOverEyebrow.textContent=win?"SIEG":"KAMPF BEENDET";
+  }
+  if(window.gameOverIcon){
+    gameOverIcon.textContent=win?"★":"☠";
+  }
+  if(window.gameOverTitle){
+    gameOverTitle.textContent=win?"HELLMO & Crazby sind besiegt!":"Ein Held ist gefallen";
+  }
+  if(window.gameOverText){
+    gameOverText.textContent=win
+      ?"Der letzte Treffer sitzt. Für einen Moment wird es still – dann ist klar: Ihr habt den Boss bezwungen."
+      :"Der Kampf endet hier. HELLMO & Crazby behalten diesmal die Oberhand.";
+  }
+  if(window.birthdayPrize){
+    birthdayPrize.style.display=win?"block":"none";
+  }
+  if(window.gameOverModal){
+    gameOverModal.style.display="flex";
+  }
+
   log(`🏁 Kampf beendet: ${reason}.`);
 }
 function render(){
