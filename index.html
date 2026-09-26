@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – guided Boss Return
+   v1.11.10 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – physical-table play / curated Boss Return
+   v1.11.10 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – Frontkamera QR card scanner
+   v1.11.10 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – robust camera handling
+   v1.11.10 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – QR diagnostics
+   v1.11.10 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – scan light + tolerant real-card QR mapping
+   v1.11.10 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – tablet bossboard layout
+   v1.11.10 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – tablet HUD cleanup + hero feedback
+   v1.11.10 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – compact symbolic tablet heroes
+   v1.11.10 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – lower heroes, boss seals & battle intro
+   v1.11.10 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2607,7 +2607,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – lower heroes + prominent dismissible feedback
+   v1.11.10 – lower heroes + prominent dismissible feedback
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2687,7 +2687,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – confirmable combat feedback between heroes
+   v1.11.10 – confirmable combat feedback between heroes
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2776,7 +2776,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – centered confirmed combat feedback + log drawer
+   v1.11.10 – centered confirmed combat feedback + log drawer
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -2885,7 +2885,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – dedicated HELLMO shield reaction popup
+   v1.11.10 – dedicated HELLMO shield reaction popup
    ========================================================= */
 .shieldReactionModal{
   z-index:145 !important;
@@ -2955,7 +2955,7 @@ input{
 
 
 /* =========================================================
-   v1.11.9 – victory / birthday popup
+   v1.11.10 – victory / birthday popup
    ========================================================= */
 .victoryModalBox{
   width:min(92vw,540px);
@@ -3029,6 +3029,113 @@ input{
   text-shadow:0 0 18px rgba(242,217,149,.16);
 }
 
+
+/* =========================================================
+   v1.11.10 – prominent boss HP + full-strength warning
+   ========================================================= */
+@media(min-width:760px){
+  .tabletHudRail{
+    grid-template-columns:86px 150px 130px 64px 64px 64px !important;
+  }
+
+  .tabletHpChip{
+    min-height:66px !important;
+    padding:5px 10px !important;
+    border-color:#9b6d54 !important;
+    background:
+      radial-gradient(circle at 50% 20%,rgba(175,48,37,.18),transparent 44%),
+      linear-gradient(180deg,rgba(20,22,26,.96),rgba(9,10,12,.94)) !important;
+  }
+  .tabletHpChip .tabletHudIcon{
+    position:absolute;
+    margin-left:-92px;
+    margin-top:3px;
+    font-size:1.15rem !important;
+    color:#d75d55;
+  }
+  .tabletHpChip b{
+    font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+    font-size:2.35rem !important;
+    line-height:.95;
+    color:#fff0e9;
+    text-shadow:0 2px 0 #000;
+  }
+  .tabletHpChip small{
+    margin-top:-2px;
+    font-size:.6rem;
+    letter-spacing:.18em;
+    color:#9f968a;
+  }
+
+  .tabletRoundChip.powered{
+    border-color:#b94e4e !important;
+    background:
+      radial-gradient(circle at 50% 18%,rgba(178,45,45,.25),transparent 50%),
+      linear-gradient(180deg,rgba(36,12,14,.96),rgba(13,8,9,.95)) !important;
+    box-shadow:0 0 16px rgba(187,57,57,.22);
+  }
+  .tabletRoundChip.powered .tabletHudIcon,
+  .tabletRoundChip.powered b{
+    color:#ff6b65 !important;
+  }
+
+  .powerUpModal{
+    z-index:150 !important;
+    background:rgba(0,0,0,.5) !important;
+  }
+  .powerUpBox{
+    width:min(90vw,460px);
+    text-align:center;
+    padding:25px 24px 21px !important;
+    border:2px solid #a64a45 !important;
+    background:
+      radial-gradient(circle at 50% 0%,rgba(180,44,37,.2),transparent 38%),
+      linear-gradient(180deg,#1b1b1e,#090a0c) !important;
+    box-shadow:0 24px 70px rgba(0,0,0,.7),0 0 28px rgba(174,57,47,.12);
+  }
+  .powerUpEyebrow{
+    font-size:.68rem;
+    letter-spacing:.22em;
+    color:#c87f75;
+  }
+  .powerUpIcon{
+    width:68px;
+    height:68px;
+    display:grid;
+    place-items:center;
+    margin:11px auto 9px;
+    border-radius:50%;
+    border:1px solid #a8504a;
+    background:#0a0b0d;
+    font-size:2rem;
+  }
+  .powerUpBox h3{
+    margin:0 0 8px !important;
+    font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+    font-size:1.9rem !important;
+    letter-spacing:.06em;
+    color:#ff8a82;
+  }
+  .powerUpBox p{
+    margin:0;
+    line-height:1.45;
+    color:#d2c5bd;
+  }
+  #powerUpConfirm{
+    width:100%;
+    min-height:46px;
+    margin-top:18px;
+  }
+}
+@media(min-width:760px) and (max-width:900px){
+  .tabletHudRail{
+    grid-template-columns:72px 130px 112px 58px 58px 58px !important;
+  }
+  .tabletHpChip b{
+    font-size:2.05rem !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3098,13 +3205,14 @@ input{
       </div>
 
       <div class="tabletHudRail">
-        <div class="tabletHudChip" title="Runde">
+        <div id="tabletRoundChip" class="tabletHudChip tabletRoundChip" title="Runde">
           <span class="tabletHudIcon">↻</span>
           <b id="tabletRound">1</b>
         </div>
-        <div class="tabletHudChip" title="Boss-Lebenspunkte">
+        <div id="tabletHpChip" class="tabletHudChip tabletHpChip" title="Boss-Lebenspunkte">
           <span class="tabletHudIcon">♥</span>
           <b id="tabletBossHp">90</b>
+          <small>LP</small>
         </div>
         <div class="tabletHudChip" title="Aktiver Bosskopf">
           <span class="tabletHudIcon">◉</span>
@@ -3366,6 +3474,17 @@ input{
 </div>
 
 
+
+<div id="powerUpModal" class="modal powerUpModal" style="display:none">
+  <div class="modalbox powerUpBox">
+    <div class="powerUpEyebrow">RUNDE 5</div>
+    <div class="powerUpIcon">🔥</div>
+    <h3>Volle Stärke!</h3>
+    <p>HELLMO &amp; Crazby haben genug gespielt.<br>Ab jetzt wird der Kampf deutlich gefährlicher.</p>
+    <button id="powerUpConfirm" class="primary" type="button">Weiterkämpfen</button>
+  </div>
+</div>
+
 <div id="shieldReactionModal" class="modal shieldReactionModal" style="display:none">
   <div class="modalbox shieldReactionBox">
     <div class="shieldReactionEyebrow">SCHILDREAKTION</div>
@@ -3458,7 +3577,7 @@ function showUnsupportedBoss(){
 const DB={"p1": [{"name": "Blinky", "group": "Halbling Basis", "effects": [["attack", "magic", 3]]}, {"name": "Kieselfreunde", "group": "Halbling Basis", "effects": [["boost", "ranged", 4]]}, {"name": "Schmuckdolch", "group": "Halbling Basis", "effects": [["attack", "melee", 2]]}, {"name": "Pssst-Mäntelchen", "group": "Halbling Basis", "effects": [["protect", 3]]}, {"name": "Ahnenstein", "group": "Halbling Basis", "effects": [["boost", "magic", 4]]}, {"name": "Beulenmacher", "group": "Halbling Basis", "effects": [["attack", "ranged", 3]]}, {"name": "Improvisieren", "group": "Halbling +", "effects": [["note", "Ein Held spielt die obersten 2 Karten seines Nachziehstapels aus. Im Prototyp manuell abwickeln."]]}, {"name": "Glücksbrosche", "group": "Halbling +", "effects": [["protect", 2], ["bonus_self", 1]]}, {"name": "Zauberzwille", "group": "Halbling +", "effects": [["attack", "ranged", 2], ["attack", "magic", 2]]}, {"name": "Sausekraut", "group": "Halbling +", "effects": [["heal_self", 3], ["bonus_self", 2]]}, {"name": "Hornissenstachel", "group": "Schurke Basis", "effects": [["attack", "ranged", 2], ["bonus_self", 1]]}, {"name": "Dornenfalle", "group": "Schurke Basis", "effects": [["boost", "melee", 4]]}, {"name": "Hand-Armbrust", "group": "Schurke Basis", "effects": [["attack", "ranged", 3]]}, {"name": "Schattenklinge", "group": "Schurke Basis", "effects": [["attack", "melee", 3]]}, {"name": "Wurfmesser", "group": "Schurke Basis", "effects": [["boost", "ranged", 3]]}, {"name": "Schattenrobe", "group": "Schurke Basis", "effects": [["protect", 3]]}, {"name": "Giftklinge", "group": "Schurke +", "effects": [["attack", "melee", 2], ["poison_boss", 1]]}, {"name": "Fluch des Raben", "group": "Schurke +", "effects": [["boss_direct", 2], ["note", "Kann später abgelegt werden, um eine Sanduhr-Fähigkeit gegen dich zu verhindern."]]}, {"name": "Vipernzahn", "group": "Schurke +", "effects": [["attack", "ranged", 2], ["poison_boss", 1]]}, {"name": "Rauchbombe", "group": "Schurke +", "effects": [["protect", 2], ["remove_extra_effect", 1], ["bonus_self", 1]]}], "p2": [{"name": "Morgenstern", "group": "Zwerg Basis", "effects": [["boost", "melee", 5], ["self_damage", 2]]}, {"name": "Wampenschoner", "group": "Zwerg Basis", "effects": [["protect", 4]]}, {"name": "Titan-Armschienen", "group": "Zwerg Basis", "effects": [["protect", 2], ["protect", 2]]}, {"name": "Stollensprenger", "group": "Zwerg Basis", "effects": [["attack", "ranged", 2]]}, {"name": "Schlagring", "group": "Zwerg Basis", "effects": [["boost", "melee", 3]]}, {"name": "Felsspalter", "group": "Zwerg Basis", "effects": [["attack", "melee", 4]]}, {"name": "Runenstein", "group": "Zwerg +", "effects": [["attack_round", "magic"], ["bonus_self", 1]]}, {"name": "Anti-Boss-3000", "group": "Zwerg +", "effects": [["skip_sand", 1]]}, {"name": "Rune des Königs", "group": "Zwerg +", "effects": [["draw_all", 1], ["bonus_self", 1]]}, {"name": "Gardehelm", "group": "Zwerg +", "effects": [["protect", 2], ["remove_status", 1]]}, {"name": "Schwert der Rubingarde", "group": "Krieger Basis", "effects": [["attack", "melee", 4]]}, {"name": "Amulett des Bären", "group": "Krieger Basis", "effects": [["boost", "melee", 3]]}, {"name": "Klingenblitz", "group": "Krieger Basis", "effects": [["attack", "magic", 3]]}, {"name": "Kettenhemd", "group": "Krieger Basis", "effects": [["protect", 4]]}, {"name": "Hand-Armbrust", "group": "Krieger Basis", "effects": [["attack", "ranged", 3]]}, {"name": "Wurfdolche", "group": "Krieger Basis", "effects": [["boost", "ranged", 3]]}, {"name": "Rune der Rache", "group": "Krieger +", "effects": [["attack_incoming", "ranged"]]}, {"name": "Ritterlicher Beistand", "group": "Krieger +", "effects": [["note", "Lenkt eine andere Boss-Attacke auf dich um. Für 2 Spieler/Einzelziel im Prototyp manuell."]]}, {"name": "Finte", "group": "Krieger +", "effects": [["boost", "melee", 2], ["bonus_self", 1]]}, {"name": "Schulterdornen", "group": "Krieger +", "effects": [["attack", "melee", 2], ["protect", 2]]}], "common": [{"name": "Rucksack", "group": "Gegenstand", "effects": [["draw_self", 3]]}, {"name": "Heiltrank", "group": "Gegenstand", "effects": [["heal_target", 8]]}, {"name": "Glücksbringer", "group": "Gegenstand", "effects": [["note", "Oberste Karte des Nachziehstapels spielen; Blitze werden ignoriert. Manuell abwickeln."]]}, {"name": "Medizintasche", "group": "Gegenstand", "effects": [["remove_status", 2]]}, {"name": "Trinkschlauch", "group": "Gegenstand", "effects": [["heal_self", 3]]}, {"name": "Fluchbrecher", "group": "Beute ★", "effects": [["note", "1 aktiven Fluch eines Helden ablegen."]]}, {"name": "Lebendige Stiefel", "group": "Beute ★", "effects": [["protect", 1], ["draw_target", 1], ["bonus_self", 1]]}, {"name": "Klinge des Windes", "group": "Beute ★", "effects": [["attack", "melee", 3], ["bonus_self", 1]]}, {"name": "Arkanes Monokel", "group": "Beute ★", "effects": [["boost", "ranged", 3], ["boost", "magic", 3]]}, {"name": "Banner des Mutes", "group": "Beute ★", "effects": [["bonus_other", 1], ["bonus_self", 1]]}, {"name": "Waffengift", "group": "Beute ★★", "effects": [["shield_reduce", 2], ["note", "Wird der Schild dadurch zerstört, erhält der Boss 2 Gift."]]}, {"name": "Anspornen", "group": "Beute ★★", "effects": [["draw_target", 3], ["bonus_target", 1]]}, {"name": "Schicksalsmünze", "group": "Beute ★★", "effects": [["boost", "melee", 5]]}, {"name": "Himmelsrune", "group": "Beute ★★", "effects": [["attack", "magic", 4], ["draw_target", 1]]}, {"name": "Wurfschild des Gladiators", "group": "Beute ★★", "effects": [["boost", "ranged", 3], ["protect", 3]]}, {"name": "Pyro-Falle", "group": "Beute ★★★", "effects": [["shield_reduce_no_trigger", 4]]}, {"name": "Geweihte Schulterplatten", "group": "Beute ★★★", "effects": [["protect", 4], ["remove_extra_effect", 1]]}, {"name": "Elixier der Sorglosigkeit", "group": "Beute ★★★", "effects": [["remove_status", 1], ["note", "Zusätzlich je 1 Statusmarker von jedem Helden entfernen."]]}, {"name": "Todsicherer Pfeil", "group": "Beute ★★★", "effects": [["boost", "ranged", 5]]}, {"name": "Feenkokon", "group": "Beute ★★★", "effects": [["heal_all", 3], ["bonus_self", 1]]}, {"name": "Ornithopter", "group": "Beute ★★★★", "effects": [["boss_direct", 3], ["bonus_self", 1]]}, {"name": "Magische Haut", "group": "Beute ★★★★", "effects": [["protect_round"], ["bonus_self", 1]]}, {"name": "Perfektes Zusammenspiel", "group": "Beute ★★★★", "effects": [["draw_all", 2], ["note", "Jeder Held legt 1 Handkarte verdeckt auf seinen Nachziehstapel."], ["bonus_self", 1]]}, {"name": "Arkane Klinge", "group": "Beute ★★★★", "effects": [["boost", "melee", 4], ["boost", "magic", 3]]}, {"name": "Pestbote", "group": "Beute ★★★★", "effects": [["poison_boss", 2], ["note", "Nur spielbar, wenn zusätzlich 1 Handkarte auf den Nachziehstapel gelegt wird."]]}]};
 const N={p1:"Assassine",p2:"Krieger"};
 const S={
-  bossHp:1,maxHp:1,round:1,bossId:REQUESTED_BOSS_ID,head:"HELLMO",headStreak:1,hellmoNext:"standard",crazbyNext:"standard",bossPoison:0,
+  bossHp:90,maxHp:90,round:1,bossId:REQUESTED_BOSS_ID,head:"HELLMO",headStreak:1,hellmoNext:"standard",crazbyNext:"standard",bossPoison:0,
   sandEveryReturn:true,
   start:"p1",queue:[],bonusQueue:[],phaseActionsPlayed:0,
   active:0,passive:0,offensive:0,
@@ -3469,7 +3588,7 @@ const S={
   fullBlockCount:0,fullBlockMode:false,
   damageTypesPlayed:{melee:false,ranged:false,magic:false},pool:"deck",
   pendingCard:null, pendingShieldCard:null, pendingRedirect:null,
-  pendingEffectSequence:null, chainedAction:null, improvisieren:null, muteHeroFeedback:false, heroFeedbackQueue:[], heroFeedbackOpen:false, shieldReactionQueue:[], shieldReactionOpen:false, gameOver:false
+  pendingEffectSequence:null, chainedAction:null, improvisieren:null, muteHeroFeedback:false, heroFeedbackQueue:[], heroFeedbackOpen:false, shieldReactionQueue:[], shieldReactionOpen:false, gameOver:false, powerUpShown:false
 };
 function log(x){
  if(S.captureBossReturn && typeof x==="string") S.bossReturnSteps.push(x);logEl.textContent+=x+"\n";logEl.scrollTop=logEl.scrollHeight}
@@ -4300,6 +4419,18 @@ if(window.bossReturnNextButton){
   bossReturnNextButton.addEventListener("click",nextBossReturnStep);
 }
 
+
+function showPowerUpNotice(){
+  if(S.powerUpShown)return;
+  S.powerUpShown=true;
+  const modal=document.getElementById("powerUpModal");
+  if(modal)modal.style.display="flex";
+}
+function closePowerUpNotice(){
+  const modal=document.getElementById("powerUpModal");
+  if(modal)modal.style.display="none";
+}
+
 function bossReturn(){
  S.muteHeroFeedback=true;
  S.bossReturnSteps=[];
@@ -4469,7 +4600,10 @@ function bossReturn(){
 
  // Neue Runde intern vorbereiten.
  S.round++;
- if(S.round===5) log("🔥 Runde 5: HELLMO & Crazby kämpfen ab jetzt mit voller Stärke.");
+ if(S.round===5){
+   log("🔥 Runde 5: HELLMO & Crazby kämpfen ab jetzt mit voller Stärke.");
+   showPowerUpNotice();
+ }
 
  S.phaseActionsPlayed=0;
  S.active=S.passive=S.offensive=0;
@@ -4686,6 +4820,7 @@ function render(){
  fullBlockBox.style.display=S.fullBlockCount>0?"block":"none";
  for(const t of ["melee","ranged","magic"]){let box=document.getElementById(t==="melee"?"shieldMeleeBox":t==="ranged"?"shieldRangedBox":"shieldMagicBox");box.className="shield"+(S.head==="HELLMO"&&S.orangeEffectShield===t&&S.orangeShieldEffect?" effect":"");let lab=document.getElementById(t==="melee"?"sem":t==="ranged"?"ser":"seg");lab.textContent=S.head==="HELLMO"&&S.orangeEffectShield===t&&S.orangeShieldEffect?S.orangeShieldEffect:""}
  if(window.tabletRound) tabletRound.textContent=S.round;
+ if(window.tabletRoundChip) tabletRoundChip.classList.toggle("powered",S.round>=5);
  if(window.tabletBossHp) tabletBossHp.textContent=S.bossHp;
  if(window.tabletHead) tabletHead.textContent=S.head;
  if(window.tabletP1Attack) tabletP1Attack.textContent=S.incoming.p1?.current??0;
@@ -5289,6 +5424,14 @@ window.addEventListener("DOMContentLoaded",()=>{
   const shieldReactionConfirm=document.getElementById("shieldReactionConfirm");
   if(shieldReactionConfirm){
     shieldReactionConfirm.addEventListener("click",confirmShieldReaction);
+  }
+});
+
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const powerUpConfirm=document.getElementById("powerUpConfirm");
+  if(powerUpConfirm){
+    powerUpConfirm.addEventListener("click",closePowerUpNotice);
   }
 });
 
