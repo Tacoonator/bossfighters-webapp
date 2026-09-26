@@ -1581,7 +1581,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – guided Boss Return
+   v1.11.18 – guided Boss Return
    ========================================================= */
 .bossReturnModalBox{
   width:min(92vw,480px);
@@ -1651,7 +1651,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – physical-table play / curated Boss Return
+   v1.11.18 – physical-table play / curated Boss Return
    ========================================================= */
 .mobileHeroCard{
   grid-template-columns:1fr !important;
@@ -1706,7 +1706,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – Frontkamera QR card scanner
+   v1.11.18 – Frontkamera QR card scanner
    ========================================================= */
 .scannerModal{
   z-index:120 !important;
@@ -1848,7 +1848,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – robust camera handling
+   v1.11.18 – robust camera handling
    ========================================================= */
 .scannerCameraControls{
   display:flex;
@@ -1867,7 +1867,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – QR diagnostics
+   v1.11.18 – QR diagnostics
    ========================================================= */
 .scannerRawWrap{
   margin:10px 0 12px;
@@ -1895,7 +1895,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – scan light + tolerant real-card QR mapping
+   v1.11.18 – scan light + tolerant real-card QR mapping
    ========================================================= */
 .scannerLightBar{
   height:28px;
@@ -1921,7 +1921,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – tablet bossboard layout
+   v1.11.18 – tablet bossboard layout
    ========================================================= */
 .starterModalBox,
 .endGameModalBox{
@@ -2165,7 +2165,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – tablet HUD cleanup + hero feedback
+   v1.11.18 – tablet HUD cleanup + hero feedback
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2321,7 +2321,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – compact symbolic tablet heroes
+   v1.11.18 – compact symbolic tablet heroes
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2419,7 +2419,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – lower heroes, boss seals & battle intro
+   v1.11.18 – lower heroes, boss seals & battle intro
    ========================================================= */
 .introModal{
   z-index:150 !important;
@@ -2607,7 +2607,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – lower heroes + prominent dismissible feedback
+   v1.11.18 – lower heroes + prominent dismissible feedback
    ========================================================= */
 @media(min-width:760px){
   .tabletHeroMarker{
@@ -2687,7 +2687,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – confirmable combat feedback between heroes
+   v1.11.18 – confirmable combat feedback between heroes
    ========================================================= */
 .heroFeedbackLayer{
   position:absolute;
@@ -2776,7 +2776,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – centered confirmed combat feedback + log drawer
+   v1.11.18 – centered confirmed combat feedback + log drawer
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -2885,7 +2885,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – dedicated HELLMO shield reaction popup
+   v1.11.18 – dedicated HELLMO shield reaction popup
    ========================================================= */
 .shieldReactionModal{
   z-index:145 !important;
@@ -2955,7 +2955,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – victory / birthday popup
+   v1.11.18 – victory / birthday popup
    ========================================================= */
 .victoryModalBox{
   width:min(92vw,540px);
@@ -3031,7 +3031,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – prominent boss HP + full-strength warning
+   v1.11.18 – prominent boss HP + full-strength warning
    ========================================================= */
 @media(min-width:760px){
   .tabletHudRail{
@@ -3138,7 +3138,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – symmetric boss HUD + centered large HP
+   v1.11.18 – symmetric boss HUD + centered large HP
    ========================================================= */
 @media(min-width:760px){
   /* Old HUD rail is no longer used */
@@ -3325,7 +3325,7 @@ input{
 
 
 /* =========================================================
-   v1.11.17 – start-player selection directly on the board
+   v1.11.18 – start-player selection directly on the board
    ========================================================= */
 .starterBoardHint{
   display:none;
@@ -3398,7 +3398,7 @@ body.choosingStarter .cardsPanel{
 
 
 /* =========================================================
-   v1.11.17 – compact floating scanner
+   v1.11.18 – compact floating scanner
    ========================================================= */
 .scannerModal{
   align-items:center !important;
@@ -3477,7 +3477,7 @@ body.choosingStarter .cardsPanel{
 
 
 /* =========================================================
-   v1.11.17 – version badge + fullscreen launch
+   v1.11.18 – version badge + fullscreen launch
    ========================================================= */
 .introModalBox{
   position:relative;
@@ -3494,7 +3494,7 @@ body.choosingStarter .cardsPanel{
 
 
 /* =========================================================
-   v1.11.17 – top-edge scanner light
+   v1.11.18 – top-edge scanner light
    ========================================================= */
 .screenEdgeLight{
   position:fixed;
@@ -3520,6 +3520,32 @@ body.scannerActive .screenEdgeLight{
   body.scannerActive .screenEdgeLight{
     height:40px;
   }
+}
+
+
+/* =========================================================
+   v1.11.18 – restore fullscreen button
+   ========================================================= */
+.fullscreenRestoreButton{
+  display:none;
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  z-index:90;
+  width:42px;
+  min-width:42px;
+  height:42px;
+  padding:0;
+  place-items:center;
+  border-radius:50%;
+  font-size:1.15rem;
+  background:rgba(11,13,16,.92);
+  border:1px solid #756d62;
+  color:#e7ded0;
+  box-shadow:0 8px 22px rgba(0,0,0,.35);
+}
+body.notFullscreen .fullscreenRestoreButton{
+  display:grid;
 }
 
 </style>
@@ -3627,6 +3653,8 @@ body.scannerActive .screenEdgeLight{
         </button>
         <button id="openEndGame" class="tabletEdgeButton tabletEndButton" type="button" title="Kampf beenden">☠</button>
       </div>
+
+      <button id="fullscreenRestoreButton" class="fullscreenRestoreButton" type="button" title="Vollbild wiederherstellen">⛶</button>
 
       <div class="attacks">
         <div class="attackcard">
@@ -3780,7 +3808,7 @@ body.scannerActive .screenEdgeLight{
       <b>Bereit?</b> Dann legt eure Karten bereit.
     </p>
     <button id="introStartButton" class="primary introStartButton" type="button" onclick="beginBattleIntro()">Kampf beginnen</button>
-    <div class="introVersion">v1.11.17</div>
+    <div class="introVersion">v1.11.18</div>
   </div>
 </div>
 
@@ -5188,6 +5216,25 @@ window.addEventListener("pointerdown",()=>{
 },{once:true});
 
 
+
+function isGameFullscreen(){
+  return !!(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement
+  );
+}
+
+function updateFullscreenRestoreButton(){
+  document.body.classList.toggle("notFullscreen",!isGameFullscreen());
+}
+
+document.addEventListener("fullscreenchange",updateFullscreenRestoreButton);
+document.addEventListener("webkitfullscreenchange",updateFullscreenRestoreButton);
+
+window.addEventListener("resize",()=>{
+  setTimeout(updateFullscreenRestoreButton,80);
+});
+
 async function requestGameFullscreen(){
   const el=document.documentElement;
 
@@ -5196,11 +5243,13 @@ async function requestGameFullscreen(){
 
     if(el.requestFullscreen){
       await el.requestFullscreen({navigationUI:"hide"});
+      updateFullscreenRestoreButton();
       return true;
     }
 
     if(el.webkitRequestFullscreen){
       el.webkitRequestFullscreen();
+      updateFullscreenRestoreButton();
       return true;
     }
   }catch(err){
@@ -5951,6 +6000,18 @@ window.addEventListener("DOMContentLoaded",()=>{
 
   bindStarter(p1,"p1");
   bindStarter(p2,"p2");
+});
+
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const fsButton=document.getElementById("fullscreenRestoreButton");
+  if(fsButton){
+    fsButton.addEventListener("click",async()=>{
+      await requestGameFullscreen();
+      updateFullscreenRestoreButton();
+    });
+  }
+  updateFullscreenRestoreButton();
 });
 
 </script>
